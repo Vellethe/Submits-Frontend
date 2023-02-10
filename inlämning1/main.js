@@ -98,7 +98,7 @@ let selectedColor = "";
 let page = 1;
 
 let form = document.querySelector("form");
-form.onsubmit = event => {
+form.onsubmit = async event => {
     event.preventDefault();
     page = 1;
     searchTerm = form.searchQuerry.value;
@@ -109,9 +109,9 @@ form.onsubmit = event => {
 
     ClearData();
 
-
-    CreateButtons();
-
+    if (document.querySelector("#nextButton") == undefined) {
+        await CreateButtons();
+    }
     ShowNewData();
 };
 
