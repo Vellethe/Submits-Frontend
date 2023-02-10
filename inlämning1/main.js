@@ -38,7 +38,24 @@ function CreatePicture(data) {
 async function ShowNewData() {
     ClearData();
     let data = await fetchData(searchTerm, selectedColor, page);
-    
+
+    let totalPages = Math.ceil(data.totalHits / 10);
+
+    if (page == 1) {
+        document.querySelector("#previousButton").disabled = true;
+    }
+    else {
+        document.querySelector("#previousButton").disabled = false;
+    }
+
+    if (page == totalPages) {
+        document.querySelector("#nextButton").disabled = true;
+    }
+    else {
+
+        document.querySelector("#nextButton").disabled = false;
+    }
+
     for (let item of data.hits) {
         CreatePicture(item)
     }
@@ -57,6 +74,9 @@ function CreateButtons() {
 
     nextButton.textContent = "Next";
     previousButton.textContent = "Previous";
+
+    nextButton.id = "nextButton";
+    previousButton.id = "previousButton";
 
     nextButton.onclick = event => {
         page += 1;
@@ -78,19 +98,20 @@ let selectedColor = "";
 let page = 1;
 
 let form = document.querySelector("form");
-form.onsubmit = async event => {
+form.onsubmit = event => {
     event.preventDefault();
     page = 1;
     searchTerm = form.searchQuerry.value;
     selectedColor = form.colorSelect.value;
 
+    maxPages = Math.ceil()
 
 
     ClearData();
 
-    ShowNewData();
 
     CreateButtons();
 
+    ShowNewData();
 };
 
