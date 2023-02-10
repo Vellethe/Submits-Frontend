@@ -1,7 +1,44 @@
 ul{
     list-style-type: none;
+    color: white;
 }
 
 h1,form{
 text-align: center;
+color: white;
+}
+body{
+    background-image: url("wallpaper.jpg");
+    width: 100%;
+}
+li{
+    display: grid;
+    grid-template:
+    1fr 1fr 1fr 1fr
+}
+@media (max-width: 1200px)
+{
+li{
+    display: grid;
+    grid-template:
+    1fr 1fr 1fr
+}
+}
+@media (max-width: 1000px)
+{
+li
+{
+    display: grid;
+    grid-template:
+    1fr 1fr
+}
+}
+@media (max-width: 600px)
+{
+li
+{
+    display: grid;
+    grid-template:
+    1fr
+}
 }
