@@ -6,4 +6,18 @@ let response = await fetch (api_url)
 let data = await response.json();
 return data;
 }
+let form = document.querySelector("form");
+
+
+let searchTerm = "";
+let selectedColor = "";
+
+form.onsubmit = event => {
+    event.preventDefault();
+
+    searchTerm = form.searchQuerry.value;
+    selectedColor = form.colorSelect.value;
+
+
+};
 
