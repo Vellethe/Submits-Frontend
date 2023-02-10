@@ -1,11 +1,13 @@
-const api_url = "https://pixabay.com/api?key=33510753-f6643855c5ea09942a44e3e4b";
+const api_url = "https://pixabay.com/api?key=33510753-f6643855c5ea09942a44e3e4b&per_page=10";
 
 async function fetchData(keyWord, color) {
 
     let encodedKeyword = encodeURIComponent(keyWord);
 
     let modified_url = api_url + "&q=" + encodedKeyword;
-
+    if (color != "anyColor") {
+        modified_url += "&colors=" + color;
+    }
 
     let response = await fetch(modified_url)
     let data = await response.json();
@@ -40,7 +42,7 @@ async function ShowNewData(data) {
 
 function ClearData() {
     let pictureList = document.querySelector("#pictureList");
-    pictureList.innerHTML ="";
+    pictureList.innerHTML = "";
 }
 
 let searchTerm = "";
