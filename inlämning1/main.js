@@ -1,7 +1,13 @@
 const api_url = "https://pixabay.com/api?key=33510753-f6643855c5ea09942a44e3e4b";
 
-async function fetchData() {
-    let response = await fetch(api_url)
+async function fetchData(keyWord, color) {
+
+    let encodedKeyword = encodeURIComponent(keyWord);
+
+    let modified_url = api_url + "&q=" + encodedKeyword;
+
+
+    let response = await fetch(modified_url)
     let data = await response.json();
     return data;
 }
@@ -30,16 +36,15 @@ async function ShowNewData(data) {
     for (let item of data.hits) {
         CreatePicture(item)
     }
-
 }
 
-
+function ClearData() {
+    let pictureList = document.querySelector("#pictureList");
+    pictureList.innerHTML ="";
+}
 
 let searchTerm = "";
 let selectedColor = "";
-
-
-
 
 
 let form = document.querySelector("form");
@@ -49,12 +54,11 @@ form.onsubmit = async event => {
     searchTerm = form.searchQuerry.value;
     selectedColor = form.colorSelect.value;
 
-    let pictureList = document.querySelector("#pictureList");
 
-    for (let item of pictureList.children) {
-        item.remove();
-    }
-    let x = fetchData();
+
+    ClearData();
+
+    let x = fetchData(searchTerm, selectedColor);
     ShowNewData(await x)
 
 };
