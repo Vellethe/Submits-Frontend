@@ -1,6 +1,6 @@
 const api_url = "https://pixabay.com/api?key=33510753-f6643855c5ea09942a44e3e4b&per_page=10";
 
-async function fetchData(keyWord, color) {
+async function fetchData(keyWord, color, page) {
 
     let encodedKeyword = encodeURIComponent(keyWord);
 
@@ -8,6 +8,7 @@ async function fetchData(keyWord, color) {
     if (color != "anyColor") {
         modified_url += "&colors=" + color;
     }
+    modified_url += "&page=" + page;
 
     let response = await fetch(modified_url)
     let data = await response.json();
@@ -34,7 +35,10 @@ function CreatePicture(data) {
 }
 
 
-async function ShowNewData(data) {
+async function ShowNewData() {
+    ClearData();
+    let data = await fetchData(searchTerm, selectedColor, page);
+    
     for (let item of data.hits) {
         CreatePicture(item)
     }
@@ -45,14 +49,38 @@ function ClearData() {
     pictureList.innerHTML = "";
 }
 
+function CreateButtons() {
+    let buttonDiv = document.querySelector("#buttonDiv");
+
+    let nextButton = document.createElement("button");
+    let previousButton = document.createElement("button");
+
+    nextButton.textContent = "Next";
+    previousButton.textContent = "Previous";
+
+    nextButton.onclick = event => {
+        page += 1;
+        ShowNewData()
+    }
+    previousButton.onclick = event => {
+        page -= 1;
+        ShowNewData()
+    }
+
+
+
+    buttonDiv.append(nextButton, previousButton)
+
+}
+
 let searchTerm = "";
 let selectedColor = "";
-
+let page = 1;
 
 let form = document.querySelector("form");
 form.onsubmit = async event => {
     event.preventDefault();
-
+    page = 1;
     searchTerm = form.searchQuerry.value;
     selectedColor = form.colorSelect.value;
 
@@ -60,8 +88,9 @@ form.onsubmit = async event => {
 
     ClearData();
 
-    let x = fetchData(searchTerm, selectedColor);
-    ShowNewData(await x)
+    ShowNewData();
+
+    CreateButtons();
 
 };
 
