@@ -18,6 +18,10 @@ form.onsubmit = event => {
     searchTerm = form.searchQuerry.value;
     selectedColor = form.colorSelect.value;
 
+let pictureList = document.querySelector("#pictureList")
 
+for(let item of pictureList.children){
+    item.remove();
+}
 };
 
