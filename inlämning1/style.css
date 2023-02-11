@@ -1,41 +1,52 @@
-ul{
+ul {
     list-style-type: none;
     color: white;
 }
 
-h1,form{
-text-align: center;
-color: white;
+h1,
+form {
+    text-align: center;
+    color: white;
 }
-body{
+
+body {
     background-image: url("wallpaper.jpg");
     width: 100%;
 }
-#pictureList{
+
+#pictureList {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    width: 24%;
+    padding-inline-start: 0px;
 }
-/* @media (max-width: 1000px)
+
+
+#pictureList li img {
+    width: 100%;
+
+}
+
+@media (max-width: 1000px)
 {
 #pictureList{
-    display: grid;
     grid-template-columns: repeat(3, 1fr);
 }
 }
-@media (max-width: 8000px)
+
+
+@media (max-width: 800px)
 {
 #pictureList
 {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
 }
 }
+
+
 @media (max-width: 600px)
 {
 #pictureList
 {
-    display: grid;
     grid-template-columns: repeat(1, 1fr);
 }
-} */
+}
