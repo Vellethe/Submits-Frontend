@@ -1,17 +1,24 @@
-ul{
+body{
+    margin: 0px;
+}
+
+ul {
     list-style-type: none;
     color: white;
 }
 
-h1,form{
-text-align: center;
-color: white;
+h1,
+form {
+    text-align: center;
+    color: white;
 }
-body{
+
+body {
     background-image: url("wallpaper.jpg");
     width: 100%;
 }
-#pictureList{
+
+#pictureList {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 }
@@ -20,26 +27,26 @@ body{
     height: 90%;
     object-fit: cover;
 }
+
 @media (max-width: 1200px)
 {
 #pictureList{
-    display: grid;
     grid-template-columns: repeat(3, 1fr);
 }
 }
+
 @media (max-width: 900px)
 {
 #pictureList
 {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
 }
 }
+
 @media (max-width: 600px)
 {
 #pictureList
 {
-    display: grid;
     grid-template-columns: repeat(1, 1fr);
 }
 }
