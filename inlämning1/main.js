@@ -69,27 +69,28 @@ function ClearData() {
 function CreateButtons() {
     let buttonDiv = document.querySelector("#buttonDiv");
 
-    let nextButton = document.createElement("button");
     let previousButton = document.createElement("button");
+    let nextButton = document.createElement("button");
 
-    nextButton.textContent = "Next";
     previousButton.textContent = "Previous";
+    nextButton.textContent = "Next";
 
-    nextButton.id = "nextButton";
     previousButton.id = "previousButton";
+    nextButton.id = "nextButton";
 
-    nextButton.onclick = event => {
-        page += 1;
-        ShowNewData()
-    }
     previousButton.onclick = event => {
         page -= 1;
         ShowNewData()
     }
+    nextButton.onclick = event => {
+        page += 1;
+        ShowNewData()
+    }
 
+    buttonDiv.appendChild(previousButton);
+    buttonDiv.appendChild(nextButton);
 
-
-    buttonDiv.append(nextButton, previousButton)
+    buttonDiv.append(previousButton, nextButton)
 
 }
 
