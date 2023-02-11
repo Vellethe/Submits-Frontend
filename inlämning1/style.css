@@ -1,3 +1,7 @@
+body{
+    margin: 0px;
+}
+
 ul {
     list-style-type: none;
     color: white;
@@ -18,6 +22,9 @@ body {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     padding-inline-start: 0px;
+    grid-gap: 10px;
+    padding: 10px;
+    align-items: baseline;
 }
 
 
