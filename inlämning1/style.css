@@ -18,6 +18,10 @@ body {
     width: 100%;
 }
 
+#buttonDiv{
+    text-align: center;
+}
+
 #pictureList {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
