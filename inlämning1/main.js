@@ -26,6 +26,8 @@ function CreatePicture(data) {
     tags.innerText = " Tags: " + data.tags;
     author.innerText = " Taken by: " + data.user;
 
+    tags.classList.add("tags");
+    author.classList.add("author");
 
     newEntry.append(picture)
     newEntry.append(tags)
