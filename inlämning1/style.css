@@ -19,7 +19,11 @@ p{
 
 body {
     background-image: url("wallpaper.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
     width: 100%;
+    /*  no repeat visar en vit tom bakgrund när man gör smalare
+        utan no repeat ser man bilden 2-3 gånger under varandra när det är smalare */
 }
 
 #buttonDiv{
