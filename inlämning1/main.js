@@ -23,8 +23,8 @@ function CreatePicture(data) {
     let author = document.createElement("p");
 
     picture.src = data.webformatURL;
-    tags.innerText = data.tags;
-    author.innerText = data.user;
+    tags.innerText = " Tags: " + data.tags;
+    author.innerText = " Taken by: " + data.user;
 
 
     newEntry.append(picture)

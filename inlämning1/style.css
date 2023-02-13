@@ -13,6 +13,10 @@ form {
     color: white;
 }
 
+p{
+    font-family: 'Oleo Script', cursive;
+}
+
 body {
     background-image: url("wallpaper.jpg");
     width: 100%;
