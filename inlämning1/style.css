@@ -16,12 +16,17 @@ form {
 p{
     font-family: 'Oleo Script', cursive;
 }
+html{
+    height: 100%;
+}
 
 body {
     background-image: url("wallpaper.jpg");
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     width: 100%;
+    height: 100%;
     /*  no repeat visar en vit tom bakgrund när man gör smalare
         utan no repeat ser man bilden 2-3 gånger under varandra när det är smalare */
 }
@@ -44,6 +49,9 @@ body {
 }
 #pictureList img{
     width: 90%;
+    height: 300px;
+/* undvik % på höjder */
+    object-fit: cover;
     background-size: cover;
 }
 
