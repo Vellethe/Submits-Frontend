@@ -28,6 +28,8 @@ body
 {
     margin-left: 10px;
     cursor: pointer;
+    height: 50px;
+    width: 30px;
 }
 .checkbox
 {
