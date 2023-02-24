@@ -23,6 +23,15 @@ body
 #tasks
 {
     font-size: 25px;
+}
+.delete
+{
+    margin-left: 10px;
+    cursor: pointer;
+}
+.checkbox
+{
+    margin-right: 10px;
     cursor: pointer;
 }
 ul
