@@ -11,6 +11,20 @@ body
 {
     text-align: center;
 }
+#userInput
+{
+    min-width: 450px;
+    min-height: 50px;
+    background-color: white;
+    border-radius: 10px;
+    border: 2px solid #d1d3d4;
+    /* border: none; funkar på todos exemple sida men inte här */
+}
+#tasks
+{
+    font-size: 25px;
+    cursor: pointer;
+}
 ul
 {
     list-style-type: none;
