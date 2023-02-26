@@ -3,9 +3,9 @@ let textbox = document.getElementById("textbox")
 let button = document.getElementById("button")
 let tasksList = document.getElementById("tasks");
 let inputField = document.getElementById("userInput");
-let allButton = document.querySelector(".all");
-let activeButton = document.querySelector(".active");
-let completedButton = document.querySelector(".completed");
+let allButton = document.querySelector("[name=\"all\"]");
+let activeButton = document.querySelector("[name=\"active\"]");
+let completedButton = document.querySelector("[name=\"completed\"]");
 
 function addListItem() 
 {
@@ -39,7 +39,7 @@ function filterTasks() {
   let activeTasks = tasks.filter(task => !task.completed);
   let completedTasks = tasks.filter(task => task.completed);
 
-  switch (this.classList[0]) 
+  switch (this.name) 
   {
     case "all":
       displayTasks(tasks);
