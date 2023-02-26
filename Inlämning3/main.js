@@ -1,14 +1,22 @@
 let tasks = [];
-let textbox = document.getElementById("textbox")
-let button = document.getElementById("button")
+let textbox = document.getElementById("textbox");
+let submitButton = document.querySelector("form button");
 let tasksList = document.getElementById("tasks");
 let inputField = document.getElementById("userInput");
 let allButton = document.querySelector("[name=\"all\"]");
 let activeButton = document.querySelector("[name=\"active\"]");
 let completedButton = document.querySelector("[name=\"completed\"]");
+let form = document.querySelector("form");
 
-function addListItem() 
-{
+
+form.onsubmit = event => {
+  event.preventDefault();
+  addListItem();
+}
+
+
+
+function addListItem() {
   let task = {
     description: inputField.value,
     completed: false
@@ -16,8 +24,8 @@ function addListItem()
   tasks.push(task);
 
   let listItem = document.createElement("li");
-  listItem.innerHTML = 
-  ` <input type="checkbox">
+  listItem.innerHTML =
+    ` <input type="checkbox">
     <span>${task.description}</span>
     <button class="delete">X</button>`
     ;
@@ -28,8 +36,7 @@ function addListItem()
   updateItemCount();
 }
 
-function updateItemCount() 
-{
+function updateItemCount() {
   let activeTasks = tasks.filter(task => !task.completed);
   let itemsLeft = document.querySelector(".itemsLeft");
   itemsLeft.innerText = `${activeTasks.length} item${activeTasks.length === 1 ? "" : "s"} left`;
@@ -39,8 +46,7 @@ function filterTasks() {
   let activeTasks = tasks.filter(task => !task.completed);
   let completedTasks = tasks.filter(task => task.completed);
 
-  switch (this.name) 
-  {
+  switch (this.name) {
     case "all":
       displayTasks(tasks);
       break;
@@ -53,8 +59,7 @@ function filterTasks() {
   }
 }
 
-function displayTasks(tasks) 
-{
+function displayTasks(tasks) {
   tasksList.innerHTML = "";
   tasks.forEach(task => {
     let listItem = document.createElement("li");
@@ -75,8 +80,7 @@ function displayTasks(tasks)
   });
 }
 
-function toggleTaskCompletion(event) 
-{
+function toggleTaskCompletion(event) {
   let checkbox = event.target;
   let listItem = checkbox.parentElement;
   let taskDescription = listItem.querySelector("span");
@@ -88,8 +92,7 @@ function toggleTaskCompletion(event)
   updateItemCount();
 }
 
-function deleteTask(event) 
-{
+function deleteTask(event) {
   let deleteButton = event.target;
   let listItem = deleteButton.parentElement;
   let taskIndex = Array.from(tasksList.children).indexOf(listItem);
@@ -111,4 +114,4 @@ tasksList.addEventListener("click", event => {
   }
 });
 
-  
+
