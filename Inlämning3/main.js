@@ -28,7 +28,8 @@ function addListItem()
   updateItemCount();
 }
 
-function updateItemCount() {
+function updateItemCount() 
+{
   let activeTasks = tasks.filter(task => !task.completed);
   let itemsLeft = document.querySelector(".itemsLeft");
   itemsLeft.innerText = `${activeTasks.length} item${activeTasks.length === 1 ? "" : "s"} left`;
@@ -52,7 +53,8 @@ function filterTasks() {
   }
 }
 
-function displayTasks(tasks) {
+function displayTasks(tasks) 
+{
   tasksList.innerHTML = "";
   tasks.forEach(task => {
     let listItem = document.createElement("li");
@@ -73,7 +75,8 @@ function displayTasks(tasks) {
   });
 }
 
-function toggleTaskCompletion(event) {
+function toggleTaskCompletion(event) 
+{
   let checkbox = event.target;
   let listItem = checkbox.parentElement;
   let taskDescription = listItem.querySelector("span");
@@ -85,7 +88,8 @@ function toggleTaskCompletion(event) {
   updateItemCount();
 }
 
-function deleteTask(event) {
+function deleteTask(event) 
+{
   let deleteButton = event.target;
   let listItem = deleteButton.parentElement;
   let taskIndex = Array.from(tasksList.children).indexOf(listItem);
