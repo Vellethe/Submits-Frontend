@@ -24,16 +24,24 @@ body
 {
     font-size: 25px;
 }
+#sorting
+{
+    display: block;
+}
 .delete
 {
     margin-left: 10px;
     cursor: pointer;
-    height: 50px;
+    height: 20px;
     width: 30px;
 }
 .checkbox
 {
     margin-right: 10px;
+    cursor: pointer;
+}
+.sorting
+{
     cursor: pointer;
 }
 ul
