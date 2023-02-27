@@ -39,7 +39,13 @@ function addListItem() {
 function updateItemCount() {
   let activeTasks = tasks.filter(task => !task.completed);
   let itemsLeft = document.querySelector(".itemsLeft");
-  itemsLeft.innerText = `${activeTasks.length} item${activeTasks.length === 1 ? "" : "s"} left`;
+  if(activeTasks.length > 0){
+
+  itemsLeft.textContent = `${activeTasks.length} item${activeTasks.length === 1 ? "" : "s"} left`;
+  }
+  else{
+    itemsLeft.textContent="";
+  }
 }
 
 function filterTasks() {
