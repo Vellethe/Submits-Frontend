@@ -1,4 +1,4 @@
-const api_url = "https://pixabay.com/api?key=33510753-f6643855c5ea09942a44e3e4b&per_page=10";
+const api_url = "https://pixabay.com/api/?key=33510753-f6643855c5ea09942a44e3e4b&per_page=10";
 
 async function fetchData(keyWord, color, page) {
 
