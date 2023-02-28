@@ -19,7 +19,8 @@
     <h1>Todos</h1>
     <form class="buttontask">
         <input type="text" id="userInput" placeholder="What needs to get done?" autofocus>
-        <button type="submit">Add</button>
+        <!-- button exist to make submit on enter to work -->
+        <button type="submit" hidden></button>
     </form>
     <ul id="tasks"></ul>
     <footer>
