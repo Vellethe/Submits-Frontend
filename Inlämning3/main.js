@@ -1,17 +1,18 @@
 let tasks = [];
+
 let textbox = document.getElementById("textbox");
-let submitButton = document.querySelector("form button");
 let tasksList = document.getElementById("tasks");
 let inputField = document.getElementById("userInput");
 let allButton = document.querySelector("[name=\"all\"]");
 let activeButton = document.querySelector("[name=\"active\"]");
 let completedButton = document.querySelector("[name=\"completed\"]");
 let form = document.querySelector("form");
-
+let todoFooter = document.querySelector(".todoFooter")
 
 form.onsubmit = event => {
   event.preventDefault();
   addListItem();
+  todoFooter.hidden = false;
 }
 
 
@@ -39,13 +40,8 @@ function addListItem() {
 function updateItemCount() {
   let activeTasks = tasks.filter(task => !task.completed);
   let itemsLeft = document.querySelector(".itemsLeft");
-  if(activeTasks.length > 0){
 
   itemsLeft.textContent = `${activeTasks.length} item${activeTasks.length === 1 ? "" : "s"} left`;
-  }
-  else{
-    itemsLeft.textContent="";
-  }
 }
 
 function filterTasks() {
@@ -105,6 +101,10 @@ function deleteTask(event) {
 
   tasks.splice(taskIndex, 1);
   listItem.remove();
+
+  if(tasks.length == 0){
+    todoFooter.hidden = true;
+  }
 
   updateItemCount();
 }
