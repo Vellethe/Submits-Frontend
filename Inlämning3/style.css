@@ -47,7 +47,7 @@ ul
     list-style-type: none;
     grid-template-rows: 3, 1fr;
 }
-.test{
+.todoFooter{
     position: relative;
     background-color: white;
 }
