@@ -17,26 +17,28 @@
 <body>
 
     <h1>Todos</h1>
-    <form class="buttontask">
-        <input type="text" id="userInput" placeholder="What needs to get done?" autofocus>
-        <!-- button exist to make submit on enter to work -->
-        <button type="submit" hidden></button>
-    </form>
-    <ul id="tasks"></ul>
-    <footer class="todoFooter" hidden>
-        <span class="itemsLeft"></span>
-        <ul class="sorting">
-            <li>
-                <button name="all">All</button>
-            </li>
-            <li>
-                <Button name="active">Active</Button>
-            </li>
-            <li>
-                <Button name="completed">Completed</Button>
-            </li>
-        </ul>
-    </footer>
+    <section class="app">
+        <form class="buttontask">
+            <input type="text" id="userInput" placeholder="What needs to get done?" autofocus>
+            <!-- button exist to make submit on enter to work -->
+            <button type="submit" hidden></button>
+        </form>
+        <ul id="tasks"></ul>
+        <footer class="todoFooter" hidden>
+            <span class="itemsLeft"></span>
+            <ul class="sorting">
+                <li>
+                    <button name="all">All</button>
+                </li>
+                <li>
+                    <Button name="active">Active</Button>
+                </li>
+                <li>
+                    <Button name="completed">Completed</Button>
+                </li>
+            </ul>
+        </footer>
+    </section>
 </body>
 <footer>
     <p>Written by: Allan Andersson and Axel Cullbrand</p>
