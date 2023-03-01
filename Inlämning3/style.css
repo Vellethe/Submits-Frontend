@@ -38,10 +38,6 @@ body {
     cursor: pointer;
 }
 
-.sorting {
-    cursor: pointer;
-}
-
 ul {
     list-style-type: none;
     grid-template-rows: 3, 1fr;
@@ -50,6 +46,9 @@ ul {
 .todoFooter {
     position: relative;
     background-color: white;
+    display: grid;
+    grid-template: "a b c";
+    align-items: center;
 }
 
 .todoFooter::before {
@@ -66,6 +65,7 @@ ul {
         0 18px 0 -6px rgba(255, 255, 255),
         0 19px 0 -6px rgba(0, 0, 0, 20%);
     z-index: -1;
+
 }
 
 #tasks li button {
@@ -76,6 +76,18 @@ ul {
     visibility: visible;
 }
 
-.app{
+.sorting {
+    display: flex;
+    padding-left: 0;
+    justify-content: center;
+    grid-area: "b";
+}
+
+.app {
     background-color: white;
+    width: fit-content;
+}
+
+.itemsLeft {
+    grid-area: "a";
 }
