@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 
 test('Adding a task', async ({ page }) => {
-  await page.goto("http://127.0.0.1:5500/Inl%C3%A4mning3/");
+  await page.goto("http://127.0.0.1:5500/Inlämning3/");
   let input = await page.$('#userInput');
   let submitButton = await page.$('form button[type="submit"]');
   let tasksList = await page.$('#tasks');
@@ -15,7 +15,7 @@ test('Adding a task', async ({ page }) => {
 
 test('Add task and verify items left count', async ({ page }) => {
 
-  await page.goto("http://127.0.0.1:5500/Inl%C3%A4mning3/");
+  await page.goto("http://127.0.0.1:5500/Inlämning3/");
 
   await page.fill("#userInput", "Task 1");
 
