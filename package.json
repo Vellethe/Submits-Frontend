@@ -1,0 +1,21 @@
+{
+  "name": "submits-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vellethe/Submits-Frontend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vellethe/Submits-Frontend/issues"
+  },
+  "homepage": "https://github.com/Vellethe/Submits-Frontend#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.31.1"
+  }
+}
