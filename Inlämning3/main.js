@@ -3,6 +3,7 @@ let tasks = [];
 let textbox = document.getElementById("textbox");
 let tasksList = document.getElementById("tasks");
 let inputField = document.getElementById("userInput");
+let toggleAllCheckbox = document.getElementById("toggleAll")
 let allButton = document.querySelector("[name=\"all\"]");
 let activeButton = document.querySelector("[name=\"active\"]");
 let completedButton = document.querySelector("[name=\"completed\"]");
@@ -127,6 +128,7 @@ function deleteTask(event) {
   updateItemCount();
 }
 
+
 allButton.addEventListener("click", filterTasks);
 activeButton.addEventListener("click", filterTasks);
 completedButton.addEventListener("click", filterTasks);
@@ -137,5 +139,3 @@ tasksList.addEventListener("click", event => {
     deleteTask(event);
   }
 });
-
-
