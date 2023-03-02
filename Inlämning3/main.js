@@ -25,11 +25,29 @@ function addListItem() {
   tasks.push(task);
 
   let listItem = document.createElement("li");
-  listItem.innerHTML =
-    ` <input type="checkbox">
-    <span>${task.description}</span>
-    <button class="delete">X</button>`
-    ;
+
+  let checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.classList.add("checkbox");
+
+  let deleteButton = document.createElement("button");
+  deleteButton.classList.add("delete");
+  deleteButton.textContent = "X"
+
+
+
+  let text = document.createElement("span");
+  text.textContent = task.description;
+
+  listItem.append(checkbox);
+  listItem.append(text);
+  listItem.append(deleteButton);
+
+  //  listItem.innerHTML =
+  //    ` <input type="checkbox">
+  //    <span>${task.description}</span>
+  //    <button class="delete">X</button>`
+  //    ;
   tasksList.appendChild(listItem);
 
   inputField.value = "";
@@ -102,7 +120,7 @@ function deleteTask(event) {
   tasks.splice(taskIndex, 1);
   listItem.remove();
 
-  if(tasks.length == 0){
+  if (tasks.length == 0) {
     todoFooter.hidden = true;
   }
 
