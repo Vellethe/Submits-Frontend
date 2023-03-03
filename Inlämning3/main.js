@@ -3,7 +3,6 @@ let tasks = [];
 let textbox = document.getElementById("textbox");
 let tasksList = document.getElementById("tasks");
 let inputField = document.getElementById("userInput");
-let toggleAllCheckbox = document.getElementById("toggleAll")
 let allButton = document.querySelector("[name=\"all\"]");
 let activeButton = document.querySelector("[name=\"active\"]");
 let completedButton = document.querySelector("[name=\"completed\"]");
@@ -13,7 +12,7 @@ let todoFooter = document.querySelector(".todoFooter")
 form.onsubmit = event => {
   event.preventDefault();
   addListItem();
-  todoFooter.hidden = false;
+  todoFooter.classList.remove("hidden");
 }
 
 
@@ -40,15 +39,11 @@ function addListItem() {
   let text = document.createElement("span");
   text.textContent = task.description;
 
+  listItem.classList.add("task")
   listItem.append(checkbox);
   listItem.append(text);
   listItem.append(deleteButton);
 
-  //  listItem.innerHTML =
-  //    ` <input type="checkbox">
-  //    <span>${task.description}</span>
-  //    <button class="delete">X</button>`
-  //    ;
   tasksList.appendChild(listItem);
 
   inputField.value = "";
@@ -122,12 +117,11 @@ function deleteTask(event) {
   listItem.remove();
 
   if (tasks.length == 0) {
-    todoFooter.hidden = true;
+    todoFooter.classList.add("hidden") ;
   }
 
   updateItemCount();
 }
-
 
 allButton.addEventListener("click", filterTasks);
 activeButton.addEventListener("click", filterTasks);
@@ -139,3 +133,5 @@ tasksList.addEventListener("click", event => {
     deleteTask(event);
   }
 });
+
+

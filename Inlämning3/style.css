@@ -39,6 +39,7 @@ body {
 
 ul {
     list-style-type: none;
+    padding: 0;
     grid-template-rows: 3, 1fr;
 }
 
@@ -96,4 +97,27 @@ ul {
 .creds
 {
     margin-top: 20px;
+}
+
+.hidden{
+    display: none;
+}
+
+.task{
+    display: grid;
+    grid-template: "a b c"/ auto 1fr auto;
+    margin: 10px;
+}
+
+.task input{
+    grid-area: "a";
+}
+
+.task span{
+    grid-area: "b";
+    text-align: left;
+}
+
+.task button{
+    grid-area: "c";
 }
