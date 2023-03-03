@@ -49,6 +49,7 @@ ul {
     display: grid;
     grid-template: "a b c";
     align-items: center;
+    padding: 10px;
 }
 
 .todoFooter::before {
@@ -92,6 +93,7 @@ ul {
 
 .itemsLeft {
     grid-area: "a";
+    text-align: left;
 }
 
 .creds
@@ -125,6 +127,7 @@ ul {
 #searchPart {
     display: grid;
     grid-template: "a b" /auto 1fr;
+    margin: 10px;
 }
 
 

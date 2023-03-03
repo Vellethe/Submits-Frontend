@@ -8,11 +8,13 @@ let activeButton = document.querySelector("[name=\"active\"]");
 let completedButton = document.querySelector("[name=\"completed\"]");
 let form = document.querySelector("form");
 let todoFooter = document.querySelector(".todoFooter")
+let toggleButton = document.querySelector(".toggleButton")
 
 form.onsubmit = event => {
   event.preventDefault();
   addListItem();
   todoFooter.classList.remove("hidden");
+  toggleButton.classList.remove("hidden");
 }
 
 
@@ -117,7 +119,8 @@ function deleteTask(event) {
   listItem.remove();
 
   if (tasks.length == 0) {
-    todoFooter.classList.add("hidden") ;
+    todoFooter.classList.add("hidden");
+    toggleButton.classList.add("hidden");
   }
 
   updateItemCount();
