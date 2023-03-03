@@ -1,21 +1,22 @@
 const { test, expect } = require('@playwright/test');
 
 test('Adding a task', async ({ page }) => {
-  await page.goto("Needs a working link");
-  let input = await page.$('#userInput');
-  let submitButton = await page.$('form button[type="submit"]');
-  let tasksList = await page.$('#tasks');
+  await page.goto("http://127.0.0.1:5500/Inlämning3/");
+  let input = await page.locator('#userInput');
+  let submitButton = await page.locator('form button[type="submit"]');
+  let tasksList = await page.locator('#tasks');
 
   await input.type("Buy milk");
   await page.keyboard.press("Enter");
 
-  let taskText = await tasksList.$("li span");
-  await expect(taskText.innerText()).toEqual("Buy milk");
+  let taskText = await tasksList.locator("li span").innerText();
+
+  await expect(taskText).toEqual("Buy milk");
 });
 
 test('Add task and verify items left count', async ({ page }) => {
 
-  await page.goto("Needs a working link");
+  await page.goto("http://127.0.0.1:5500/Inlämning3/");
 
   await page.fill("#userInput", "Task 1");
 
