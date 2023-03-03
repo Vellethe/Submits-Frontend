@@ -121,3 +121,17 @@ ul {
 .task button{
     grid-area: "c";
 }
+
+#searchPart {
+    display: grid;
+    grid-template: "a b" /auto 1fr;
+}
+
+
+#searchPart button {
+    grid-area: "a";
+}
+
+#searchPart input {
+    grid-area: "b";
+}

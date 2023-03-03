@@ -85,7 +85,7 @@ function displayTasks(tasks) {
     let taskDescription = document.createElement("span");
     taskDescription.innerText = task.description;
     let deleteButton = document.createElement("button");
-    deleteButton.innerText = "X";
+    deleteButton.innerText = "❌";
     deleteButton.classList.add("delete");
 
     listItem.appendChild(checkbox);
