@@ -42,8 +42,16 @@ function updateItemCount() {
 
 function filterTasks(filterMode = "") {
   console.log(tasks)
-  let activeTasks = tasks.filter(task => !task.completed);
-  let completedTasks = tasks.filter(task => task.completed);
+  let tasksIndexes = [];
+
+  tasks.forEach(function(task,index){
+    tasksIndexes.push({ index: index, data: task })
+  });
+
+
+  let activeTasks = tasksIndexes.filter(task => !task.data.completed);
+
+  let completedTasks = tasksIndexes.filter(task => task.data.completed);
 
   deleteAllButton.hidden = completedTasks.length == 0;
 
@@ -53,7 +61,7 @@ function filterTasks(filterMode = "") {
 
   switch (filterMode) {
     case "all":
-      displayTasks(tasks);
+      displayTasks(tasksIndexes);
       break;
     case "active":
       displayTasks(activeTasks);
@@ -69,23 +77,24 @@ function filterTasks(filterMode = "") {
 
 function displayTasks(tasks) {
   tasksList.innerHTML = "";
-  tasks.forEach(task => {
+  tasks.forEach(function(task,i){
     let listItem = document.createElement("li");
     listItem.classList.add("task");
 
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.classList.add("checkbox");
-    checkbox.checked = task.completed;
-    checkbox.addEventListener("change", function () { filterTasks(curentFilterMode); console.warn("testign") });
+    checkbox.checked = task.data.completed;
+    checkbox.addEventListener("change", function () { toggleTaskCompletion(task.index);});
 
     // checkbox class connects with the buttons so it works no matter what "view"
     let taskDescription = document.createElement("span");
-    taskDescription.innerText = task.description;
+    taskDescription.innerText = task.data.description;
 
     let deleteButton = document.createElement("button");
     deleteButton.innerText = "X";
     deleteButton.classList.add("delete");
+    deleteButton.addEventListener("click",function(){deleteTask(task.index)})
 
     listItem.appendChild(checkbox);
     listItem.appendChild(taskDescription);
@@ -95,44 +104,29 @@ function displayTasks(tasks) {
   });
 }
 
-function toggleTaskCompletion(event) {
-  let checkbox = event.target;
-  let listItem = checkbox.parentElement;
-  let taskDescription = listItem.querySelector("span");
-  let taskIndex = Array.from(tasksList.children).indexOf(listItem);
-
-  tasks[taskIndex].completed = checkbox.checked;
-  taskDescription.classList.toggle("completed");
-
+function toggleTaskCompletion(index) {
+let task = tasks[index];
+  task.completed = !task.completed; 
+  //taskDescription.classList.toggle("completed");
+  
+  filterTasks(curentFilterMode);
   updateItemCount();
 }
 
-function deleteTask(event) {
-  let deleteButton = event.target;
-  let listItem = deleteButton.parentElement;
-  let taskIndex = Array.from(tasksList.children).indexOf(listItem);
+function deleteTask(index) {
 
-  tasks.splice(taskIndex, 1);
-  listItem.remove();
-
+  tasks.splice(index, 1);
   if (tasks.length == 0) {
     todoFooter.classList.add("hidden");
     toggleButton.classList.add("hidden");
   }
-
+  filterTasks(curentFilterMode);
   updateItemCount();
 }
 
 allButton.addEventListener("click", filterTasks);
 activeButton.addEventListener("click", filterTasks);
 completedButton.addEventListener("click", filterTasks);
-tasksList.addEventListener("click", event => {
-  if (event.target.type === "checkbox") {
-    toggleTaskCompletion(event);
-  } else if (event.target.classList.contains("delete")) {
-    deleteTask(event);
-  }
-});
 
 toggleButton.addEventListener("click", function () {
   let targetValue = !tasks.every(x=> x.completed);
