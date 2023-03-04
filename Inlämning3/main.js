@@ -81,6 +81,7 @@ function displayTasks(tasks) {
     let listItem = document.createElement("li");
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";
+    // checkbox class connects with the buttons so it works no matter what "view"
     checkbox.classList.add("checkbox");
     checkbox.checked = task.completed;
     let taskDescription = document.createElement("span");
@@ -147,6 +148,7 @@ toggleAllCheckbox.addEventListener("click", function () {
 let deleteAllTasks = document.getElementById("deleteAll");
 deleteAllTasks.addEventListener("click", function () {
   let taskList = document.getElementById("tasks");
+  // let tasks creates a new general variable making the buttons "recreate" former list
   let removeTasks = taskList.querySelectorAll("li");
   removeTasks.forEach(function (task) {
     taskList.removeChild(task);
