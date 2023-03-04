@@ -7,16 +7,17 @@ let allButton = document.querySelector("[name=\"all\"]");
 let activeButton = document.querySelector("[name=\"active\"]");
 let completedButton = document.querySelector("[name=\"completed\"]");
 let form = document.querySelector("form");
-let todoFooter = document.querySelector(".todoFooter")
-let toggleButton = document.querySelector(".toggleButton")
+let todoFooter = document.querySelector(".todoFooter");
+let toggleButton = document.querySelector(".toggleButton");
+let deleteAllButton = document.querySelector("#deleteAll");
 
-let curentFilterMode = "all"
+let curentFilterMode = "all";
 
 form.onsubmit = event => {
   event.preventDefault();
   addListItem();
   todoFooter.classList.remove("hidden");
-  // toggleButton.classList.remove("hidden");
+  toggleButton.classList.remove("hidden");
 }
 
 
@@ -39,12 +40,14 @@ function updateItemCount() {
   itemsLeft.textContent = `${activeTasks.length} item${activeTasks.length === 1 ? "" : "s"} left`;
 }
 
-function filterTasks(filterMode="") 
-{ console.log(tasks)
+function filterTasks(filterMode = "") {
+  console.log(tasks)
   let activeTasks = tasks.filter(task => !task.completed);
   let completedTasks = tasks.filter(task => task.completed);
-  
-  if(filterMode.target != undefined){
+
+  deleteAllButton.hidden = completedTasks.length == 0;
+
+  if (filterMode.target != undefined) {
     filterMode = filterMode.target.name;
   }
 
@@ -74,7 +77,7 @@ function displayTasks(tasks) {
     checkbox.type = "checkbox";
     checkbox.classList.add("checkbox");
     checkbox.checked = task.completed;
-    checkbox.addEventListener("change",function(){filterTasks(curentFilterMode)} );
+    checkbox.addEventListener("change", function () { filterTasks(curentFilterMode); console.warn("testign") });
 
     // checkbox class connects with the buttons so it works no matter what "view"
     let taskDescription = document.createElement("span");
@@ -131,23 +134,26 @@ tasksList.addEventListener("click", event => {
   }
 });
 
-let toggleAllCheckbox = document.getElementById("toggleAll");
-toggleAllCheckbox.addEventListener("click", function () {
-  let checkboxes = document.querySelectorAll(".checkbox");
-  checkboxes.forEach(function (checkbox) {
-    checkbox.checked = toggleAllCheckbox.checked;
-  });
+toggleButton.addEventListener("click", function () {
+  let targetValue = !tasks.every(x=> x.completed);
+      
+  for(let task of tasks){
+    task.completed = targetValue;
+  }
+  filterTasks(curentFilterMode);
+  updateItemCount();
 });
 
-let deleteAllTasks = document.getElementById("deleteAll");
-deleteAllTasks.addEventListener("click", function () {
-  let taskList = document.getElementById("tasks");
-  // let tasks creates a new general variable making the buttons "recreate" former list
-  let removeTasks = taskList.querySelectorAll("li");
-  removeTasks.forEach(function (task) {
-    taskList.removeChild(task);
-  });
-  document.querySelector(".itemsLeft").textContent = "0 items left";
-  tasks = [];
+
+deleteAllButton.addEventListener("click", function () {
+  let newList = [];
+  for(let task of tasks){
+    if(task.completed == false){
+      newList.push(task);
+    }
+  }
+  tasks = newList;
+  filterTasks(curentFilterMode);
+  updateItemCount();
 });
 

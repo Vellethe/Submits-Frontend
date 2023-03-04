@@ -79,8 +79,7 @@ ul {
     visibility: visible;
 }
 
-.toggleButton 
-{
+.toggleButton {
     border: none;
     background-color: white;
 }
@@ -104,31 +103,34 @@ ul {
     text-align: left;
 }
 
-.creds
-{
+.creds {
     margin-top: 20px;
 }
 
-.hidden{
+.hidden {
     display: none;
 }
 
-.task{
+.task {
     display: grid;
-    grid-template: "a b c"/ auto 1fr auto;
+    grid-template: "a b c" / auto 1fr auto;
     margin: 10px;
+    margin-right: 10px;
+    border-bottom: 1px solid #ededed;
 }
 
-.task input{
+.task input {
     grid-area: "a";
+    height:20px;
+    width: 20px;
 }
 
-.task span{
+.task span {
     grid-area: "b";
     text-align: left;
 }
 
-.task button{
+.task button {
     grid-area: "c";
 }
 
