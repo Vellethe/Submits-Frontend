@@ -14,7 +14,7 @@ form.onsubmit = event => {
   event.preventDefault();
   addListItem();
   todoFooter.classList.remove("hidden");
-  toggleButton.classList.remove("hidden");
+  // toggleButton.classList.remove("hidden");
 }
 
 
@@ -57,7 +57,8 @@ function updateItemCount() {
   itemsLeft.textContent = `${activeTasks.length} item${activeTasks.length === 1 ? "" : "s"} left`;
 }
 
-function filterTasks() {
+function filterTasks() 
+{ console.log(tasks)
   let activeTasks = tasks.filter(task => !task.completed);
   let completedTasks = tasks.filter(task => task.completed);
 
@@ -80,6 +81,7 @@ function displayTasks(tasks) {
     let listItem = document.createElement("li");
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";
+    checkbox.classList.add("checkbox");
     checkbox.checked = task.completed;
     let taskDescription = document.createElement("span");
     taskDescription.innerText = task.description;
@@ -145,10 +147,11 @@ toggleAllCheckbox.addEventListener("click", function () {
 let deleteAllTasks = document.getElementById("deleteAll");
 deleteAllTasks.addEventListener("click", function () {
   let taskList = document.getElementById("tasks");
-  let tasks = taskList.querySelectorAll("li");
-  tasks.forEach(function (task) {
+  let removeTasks = taskList.querySelectorAll("li");
+  removeTasks.forEach(function (task) {
     taskList.removeChild(task);
   });
   document.querySelector(".itemsLeft").textContent = "0 items left";
+  tasks = [];
 });
 
