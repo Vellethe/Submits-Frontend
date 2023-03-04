@@ -10,6 +10,8 @@ let form = document.querySelector("form");
 let todoFooter = document.querySelector(".todoFooter")
 let toggleButton = document.querySelector(".toggleButton")
 
+let curentFilterMode = "all"
+
 form.onsubmit = event => {
   event.preventDefault();
   addListItem();
@@ -25,28 +27,8 @@ function addListItem() {
   };
   tasks.push(task);
 
-  let listItem = document.createElement("li");
-
-  let checkbox = document.createElement("input");
-  checkbox.type = "checkbox";
-  checkbox.classList.add("checkbox");
-
-  let deleteButton = document.createElement("button");
-  deleteButton.classList.add("delete");
-  deleteButton.textContent = "X"
-
-  let text = document.createElement("span");
-  text.textContent = task.description;
-
-  listItem.classList.add("task")
-  listItem.append(checkbox);
-  listItem.append(text);
-  listItem.append(deleteButton);
-
-  tasksList.appendChild(listItem);
-
   inputField.value = "";
-
+  filterTasks(curentFilterMode);
   updateItemCount();
 }
 
@@ -57,12 +39,16 @@ function updateItemCount() {
   itemsLeft.textContent = `${activeTasks.length} item${activeTasks.length === 1 ? "" : "s"} left`;
 }
 
-function filterTasks() 
+function filterTasks(filterMode="") 
 { console.log(tasks)
   let activeTasks = tasks.filter(task => !task.completed);
   let completedTasks = tasks.filter(task => task.completed);
+  
+  if(filterMode.target != undefined){
+    filterMode = filterMode.target.name;
+  }
 
-  switch (this.name) {
+  switch (filterMode) {
     case "all":
       displayTasks(tasks);
       break;
@@ -72,22 +58,30 @@ function filterTasks()
     case "completed":
       displayTasks(completedTasks);
       break;
+    default:
+      return;
   }
+  curentFilterMode = filterMode
 }
 
 function displayTasks(tasks) {
   tasksList.innerHTML = "";
   tasks.forEach(task => {
     let listItem = document.createElement("li");
+    listItem.classList.add("task");
+
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";
-    // checkbox class connects with the buttons so it works no matter what "view"
     checkbox.classList.add("checkbox");
     checkbox.checked = task.completed;
+    checkbox.addEventListener("change",function(){filterTasks(curentFilterMode)} );
+
+    // checkbox class connects with the buttons so it works no matter what "view"
     let taskDescription = document.createElement("span");
     taskDescription.innerText = task.description;
+
     let deleteButton = document.createElement("button");
-    deleteButton.innerText = "❌";
+    deleteButton.innerText = "X";
     deleteButton.classList.add("delete");
 
     listItem.appendChild(checkbox);
