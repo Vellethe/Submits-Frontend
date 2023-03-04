@@ -19,7 +19,9 @@
         <h1>Todos</h1>
         <div id="searchPart">
 
-            <button class="toggleButton hidden">🔽</button>
+            <!-- <button class="toggleAll hidden">🔽</button> -->
+            <input type="checkbox" id="toggleAll">
+
             <form class="buttontask">
                 <input type="text" id="userInput" placeholder="What needs to get done?" autofocus>
                 <!-- button exist to make submit on enter to work -->
@@ -40,7 +42,7 @@
                     <Button name="completed">Completed</Button>
                 </li>
             </ul>
-            <button id="removeAll">Remove all</button>
+            <button id="deleteAll">Remove all</button>
         </footer>
     </section>
 
@@ -49,6 +51,4 @@
     </footer>
 
 </body>
-
-
 </html>

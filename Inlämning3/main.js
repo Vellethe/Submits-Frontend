@@ -18,7 +18,6 @@ form.onsubmit = event => {
 }
 
 
-
 function addListItem() {
   let task = {
     description: inputField.value,
@@ -35,8 +34,6 @@ function addListItem() {
   let deleteButton = document.createElement("button");
   deleteButton.classList.add("delete");
   deleteButton.textContent = "X"
-
-
 
   let text = document.createElement("span");
   text.textContent = task.description;
@@ -137,4 +134,21 @@ tasksList.addEventListener("click", event => {
   }
 });
 
+let toggleAllCheckbox = document.getElementById("toggleAll");
+toggleAllCheckbox.addEventListener("click", function () {
+  let checkboxes = document.querySelectorAll(".checkbox");
+  checkboxes.forEach(function (checkbox) {
+    checkbox.checked = toggleAllCheckbox.checked;
+  });
+});
+
+let deleteAllTasks = document.getElementById("deleteAll");
+deleteAllTasks.addEventListener("click", function () {
+  let taskList = document.getElementById("tasks");
+  let tasks = taskList.querySelectorAll("li");
+  tasks.forEach(function (task) {
+    taskList.removeChild(task);
+  });
+  document.querySelector(".itemsLeft").textContent = "0 items left";
+});
 

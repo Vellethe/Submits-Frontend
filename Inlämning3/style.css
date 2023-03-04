@@ -30,6 +30,8 @@ body {
     cursor: pointer;
     height: 20px;
     width: 30px;
+    background-color: white;
+    border: none;
 }
 
 .checkbox {
@@ -75,6 +77,12 @@ ul {
 
 #tasks li:hover button {
     visibility: visible;
+}
+
+.toggleButton 
+{
+    border: none;
+    background-color: white;
 }
 
 .sorting {
