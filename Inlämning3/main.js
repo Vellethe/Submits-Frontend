@@ -44,7 +44,7 @@ function filterTasks(filterMode = "") {
   console.log(tasks)
   let tasksIndexes = [];
 
-  tasks.forEach(function(task,index){
+  tasks.forEach(function (task, index) {
     tasksIndexes.push({ index: index, data: task })
   });
 
@@ -77,7 +77,7 @@ function filterTasks(filterMode = "") {
 
 function displayTasks(tasks) {
   tasksList.innerHTML = "";
-  tasks.forEach(function(task,i){
+  tasks.forEach(function (task, i) {
     let listItem = document.createElement("li");
     listItem.classList.add("task");
 
@@ -85,7 +85,7 @@ function displayTasks(tasks) {
     checkbox.type = "checkbox";
     checkbox.classList.add("checkbox");
     checkbox.checked = task.data.completed;
-    checkbox.addEventListener("change", function () { toggleTaskCompletion(task.index);});
+    checkbox.addEventListener("change", function () { toggleTaskCompletion(task.index); });
 
     // checkbox class connects with the buttons so it works no matter what "view"
     let taskDescription = document.createElement("span");
@@ -94,7 +94,7 @@ function displayTasks(tasks) {
     let deleteButton = document.createElement("button");
     deleteButton.innerText = "X";
     deleteButton.classList.add("delete");
-    deleteButton.addEventListener("click",function(){deleteTask(task.index)})
+    deleteButton.addEventListener("click", function () { deleteTask(task.index) })
 
     listItem.appendChild(checkbox);
     listItem.appendChild(taskDescription);
@@ -105,10 +105,10 @@ function displayTasks(tasks) {
 }
 
 function toggleTaskCompletion(index) {
-let task = tasks[index];
-  task.completed = !task.completed; 
+  let task = tasks[index];
+  task.completed = !task.completed;
   //taskDescription.classList.toggle("completed");
-  
+
   filterTasks(curentFilterMode);
   updateItemCount();
 }
@@ -129,9 +129,9 @@ activeButton.addEventListener("click", filterTasks);
 completedButton.addEventListener("click", filterTasks);
 
 toggleButton.addEventListener("click", function () {
-  let targetValue = !tasks.every(x=> x.completed);
-      
-  for(let task of tasks){
+  let targetValue = !tasks.every(x => x.completed);
+
+  for (let task of tasks) {
     task.completed = targetValue;
   }
   filterTasks(curentFilterMode);
@@ -141,8 +141,8 @@ toggleButton.addEventListener("click", function () {
 
 deleteAllButton.addEventListener("click", function () {
   let newList = [];
-  for(let task of tasks){
-    if(task.completed == false){
+  for (let task of tasks) {
+    if (task.completed == false) {
       newList.push(task);
     }
   }
