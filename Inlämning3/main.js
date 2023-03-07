@@ -80,6 +80,9 @@ function displayTasks(tasks) {
   tasks.forEach(function (task, i) {
     let listItem = document.createElement("li");
     listItem.classList.add("task");
+    if(task.data.completed){
+    listItem.classList.add("completed");
+    }
 
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";
@@ -107,8 +110,6 @@ function displayTasks(tasks) {
 function toggleTaskCompletion(index) {
   let task = tasks[index];
   task.completed = !task.completed;
-  listItem.classList.toggle("completed", task.completed);
-  //taskDescription.classList.toggle("completed");
 
   filterTasks(curentFilterMode);
   updateItemCount();
