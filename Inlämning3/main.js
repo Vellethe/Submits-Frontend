@@ -107,6 +107,7 @@ function displayTasks(tasks) {
 function toggleTaskCompletion(index) {
   let task = tasks[index];
   task.completed = !task.completed;
+  listItem.classList.toggle("completed", task.completed);
   //taskDescription.classList.toggle("completed");
 
   filterTasks(curentFilterMode);
