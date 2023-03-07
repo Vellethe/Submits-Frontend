@@ -1,6 +1,7 @@
 h1 {
-    font-size: 60px;
-    color: rgb(255, 196, 196);
+    font-size: 100px;
+    font-weight: 100;
+    color: rgba(175, 47, 47, 0.15);
     background-color:#f5f5f5 ;
     margin: 0px ;
 }
@@ -10,6 +11,7 @@ p {
 }
 
 body {
+    font:14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
     text-align: center;
     background: #f5f5f5;
 }
