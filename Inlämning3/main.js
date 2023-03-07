@@ -38,11 +38,17 @@ function updateItemCount() {
   let itemsLeft = document.querySelector(".itemsLeft");
 
   itemsLeft.textContent = `${activeTasks.length} item${activeTasks.length === 1 ? "" : "s"} left`;
+  if (tasks.length == 0) {
+    todoFooter.classList.add("hidden");
+    toggleButton.classList.add("hidden");
+  }
 }
 
 function filterTasks(filterMode = "") {
   console.log(tasks)
   let tasksIndexes = [];
+
+
 
   tasks.forEach(function (task, index) {
     tasksIndexes.push({ index: index, data: task })
@@ -130,10 +136,7 @@ function toggleTaskCompletion(index) {
 function deleteTask(index) {
 
   tasks.splice(index, 1);
-  if (tasks.length == 0) {
-    todoFooter.classList.add("hidden");
-    toggleButton.classList.add("hidden");
-  }
+
   filterTasks(curentFilterMode);
   updateItemCount();
 }
