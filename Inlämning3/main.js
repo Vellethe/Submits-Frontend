@@ -61,12 +61,24 @@ function filterTasks(filterMode = "") {
 
   switch (filterMode) {
     case "all":
+      allButton.classList.add("selected");
+      activeButton.classList.remove("selected");
+      completedButton.classList.remove("selected");
+
       displayTasks(tasksIndexes);
       break;
     case "active":
+      activeButton.classList.add("selected");
+      allButton.classList.remove("selected");
+      completedButton.classList.remove("selected");
+
       displayTasks(activeTasks);
       break;
     case "completed":
+      completedButton.classList.add("selected");
+      activeButton.classList.remove("selected");
+      allButton.classList.remove("selected");
+
       displayTasks(completedTasks);
       break;
     default:
