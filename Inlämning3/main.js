@@ -92,8 +92,8 @@ function displayTasks(tasks) {
   tasks.forEach(function (task, i) {
     let listItem = document.createElement("li");
     listItem.classList.add("task");
-    if(task.data.completed){
-    listItem.classList.add("completed");
+    if (task.data.completed) {
+      listItem.classList.add("completed");
     }
 
     let checkbox = document.createElement("input");
