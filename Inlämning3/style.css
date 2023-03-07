@@ -1,6 +1,8 @@
 h1 {
     font-size: 60px;
     color: rgb(255, 196, 196);
+    background-color:#f5f5f5 ;
+    margin: 0px ;
 }
 
 p {
@@ -137,7 +139,6 @@ ul {
 #searchPart {
     display: grid;
     grid-template: "a b" /auto 1fr;
-    margin: 10px;
 }
 
 
