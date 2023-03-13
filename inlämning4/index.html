@@ -5,8 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
+    <div id="app">
+        <h1> Personal expense tracker</h1>
+        <form @submit.prevent="addExpense">
+            <label for="name">Name:</label>
+            <input type="text" id="name" v-model="name" required>
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" v-model="amount" required>
+            <label for="date">Date:</label>
+            <input type="date" id="date" v-model="date" required>
+            <button type="submit">Add Expense</button>
+          </form>
+    </div>
     
 </body>
 </html>
