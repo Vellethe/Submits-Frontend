@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online budget tracker</title>
-    <div class="total-spent">0kr</div>
+    <div class="totalSpent">{{ totalSpent }}kr</div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="seedData.json"></script>
     <script src="main.js" defer></script>
@@ -21,9 +21,6 @@
             <input type="date" id="date" v-model="date" required>
             <button type="submit">Add Expense</button>
         </form>
-
-
-        <button @click="test">test button</button>
     </div>
 </body>
 

@@ -16,24 +16,37 @@ function getSeedData() {
     return seedData.data;
 }
 
-
-
-
 const app = Vue.createApp({
     data() {
         return {
+
             testNum: 0,
-            transactionList: this.readFromLocalStorage() ?? getSeedData()
-
-
-
-
-
-
+            transactionList: this.readFromLocalStorage() ?? getSeedData(),
+            name: "",
+            amount: 0,
+            date: "",
+            totalSpent:
 
         }
     },
     methods: {
+        addExpense() {
+            let newExpense = {
+                name: this.name,
+                amount: this.amount, 
+                date: this.date
+            }
+            this.transactionList.push(newExpense),
+            this.writeToLocalStorage();
+            this.name = '',
+            this.amount = 0,
+            this.date = ''
+        },
+
+
+
+
+
         writeToLocalStorage(data) {
             let stringJson = JSON.stringify(data);
             window.localStorage.setItem("data", stringJson);
@@ -41,11 +54,5 @@ const app = Vue.createApp({
         readFromLocalStorage() {
             JSON.parse(window.localStorage.getItem("data"));
         },
-
-        test() {
-            this.testNum++;
-            console.log("this is test" + this.testNum);
-            console.log(this.transactionList)
-        }
     }
 }).mount('#app');
