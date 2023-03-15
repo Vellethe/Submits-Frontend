@@ -1,3 +1,15 @@
-.total-spent{
-    text-align: right;
+.totalSpent 
+{
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-right: 5%;
+    padding-top: 2%;
+}
+
+#name, #amount, #date
+{
+  justify-content: space-between;
+  align-items: center;
 }

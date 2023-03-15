@@ -47,22 +47,44 @@ const app = Vue.createApp({
             amount: 0,
             date: "",
             totalSpent: 0
-
         }
     },
+
+    computed: {
+        totalSpentFormatted(){
+            return this.totalSpent.toFixed(0) + "kr";
+        }
+    },
+
     methods: {
+        // Must parse amount to convert into number instead of string or totalSpent will be shown incorrectly
         addExpense() {
             let newExpense = {
                 name: this.name,
-                amount: this.amount,
+                amount: parseFloat(this.amount),
                 date: this.date
             }
             this.transactionList.push(newExpense),
                 this.writeToLocalStorage();
-            this.name = '',
+                this.name = '',
                 this.amount = 0,
                 this.date = ''
+                // reduce method sums up the amount of each expense in transactionList and then adds it to totalSpent 
+                this.totalSpent = this.transactionList.reduce((total, expense) => total + expense.amount, 0)
         },
+
+        deleteExpense(index) 
+        {
+            this.transactionList.splice(index, 1);
+            this.writeToLocalStorage(); 
+            this.totalSpent = this.transactionList.reduce((total, expense) => total + expense.amount, 0)
+        },
+        
+        computed: {
+            sortedItems: function() {
+              return this.items.sort((a, b) => new Date(a.date) - new Date(b.date))
+            }
+          },
 
 
 
