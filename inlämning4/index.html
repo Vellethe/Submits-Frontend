@@ -8,7 +8,6 @@
     <title>Online budget tracker</title>
     <div class="totalSpent">{{ totalSpent }}kr</div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="seedData.json"></script>
     <script src="main.js" defer></script>
 </head>
 
@@ -21,7 +20,16 @@
             <input type="date" id="date" v-model="date" required>
             <button type="submit">Add Expense</button>
         </form>
+
+
+
+
+        <canvas id="pieCanvas" width="200" height="200"></canvas>
+        <button @click="updatePie">test pie</button>
+
+
     </div>
+
 </body>
 
 </html>
