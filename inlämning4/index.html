@@ -18,6 +18,14 @@
         <form @submit.prevent="addExpense">
             <input type="text" id="name" placeholder="Enter product" v-model="name" required>
             <input type="number" id="amount" placeholder="Enter cost" v-model="amount" required>
+            <select name="category" id="category" v-model="category">
+                <option value="food">Food</option>
+                <option value="utilities">Utilities</option>
+                <option value="saving">Saving</option>
+                <option value="leisure">Leisure</option>
+                <option value="housing">Housing</option>
+                <option value="other">Other</option>
+            </select>
             <input type="date" id="date" v-model="date" required>
             <button type="submit">Add Expense</button>
         </form>
@@ -31,6 +39,7 @@
             <tr v-for="(expense, index) in transactionList" :key="index">
                 <td>{{ expense.name }}</td>
                 <td>{{ expense.amount }}</td>
+                <td>{{ expense.category }}</td>
                 <td>{{ expense.date }}</td>
                 <td>
                 <button @click="deleteExpense(index)">Delete</button>

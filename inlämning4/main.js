@@ -5,13 +5,13 @@ function getSeedData() {
                 "amount": 20,
                 "date": "2023-03-13",
                 "name": "apple",
-                "transactionCategory": "food"
+                "category": "food"
             },
             {
                 "amount": 20,
                 "date": "2023-03-14",
                 "name": "book",
-                "transactionCategory": "fun"
+                "category": "leisure"
             }
         ]
     }
@@ -46,6 +46,7 @@ const app = Vue.createApp({
             name: "",
             amount: 0,
             date: "",
+            category:"",
             totalSpent: 0
         }
     },
@@ -62,7 +63,8 @@ const app = Vue.createApp({
             let newExpense = {
                 name: this.name,
                 amount: parseFloat(this.amount),
-                date: this.date
+                date: this.date,
+                category:this.category
             }
             this.transactionList.push(newExpense);
             this.writeToLocalStorage(this.transactionList);
@@ -76,7 +78,8 @@ const app = Vue.createApp({
         deleteExpense(index) {
             this.transactionList.splice(index, 1);
             this.writeToLocalStorage();
-            this.totalSpent = this.transactionList.reduce((total, expense) => total + expense.amount, 0)
+            this.totalSpent = this.transactionList.reduce((total, expense) => total + expense.amount, 0);
+            this.writeToLocalStorage(this.transactionList);
         },
 
         computed: {
@@ -103,6 +106,7 @@ const app = Vue.createApp({
             window.localStorage.setItem("data", stringJson);
         },
         readFromLocalStorage() {
+
             if (window.localStorage.getItem("data") !== "undefined") {
 
                 return JSON.parse(window.localStorage.getItem("data"));
