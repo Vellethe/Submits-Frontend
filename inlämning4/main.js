@@ -47,7 +47,7 @@ const app = Vue.createApp({
             amount: 0,
             date: "",
             category:"",
-            totalSpent: 0,
+            totalSpent:0,
             categories:["Food","Utilities","Saving","Leisure","Housing","Other"]
         }
     },
@@ -73,7 +73,8 @@ const app = Vue.createApp({
             this.amount = 0;
             this.date = '';
             // reduce method sums up the amount of each expense in transactionList and then adds it to totalSpent 
-            this.totalSpent = this.transactionList.reduce((total, expense) => total + expense.amount, 0)
+            this.totalSpent = this.transactionList.reduce((total, expense) => total + expense.amount, 0);
+            this.updatePie();
         },
 
         deleteExpense(index) {
@@ -81,6 +82,7 @@ const app = Vue.createApp({
             this.writeToLocalStorage();
             this.totalSpent = this.transactionList.reduce((total, expense) => total + expense.amount, 0);
             this.writeToLocalStorage(this.transactionList);
+            this.updatePie();
         },
 
         computed: {
@@ -97,9 +99,20 @@ const app = Vue.createApp({
             let c = canvas.getContext("2d");
             let radius = 50;
             let centerOfPie = 100;
-            let rotation = 0;
+            let startRotation = 0;
+            c.clearRect(0,0,c.canvas.width,c.canvas.height);
 
-            makePieSlice(c, 0, 90, centerOfPie, centerOfPie, radius, "");
+            for (let category of this.categories) {
+                let itemsOfCategory = this.transactionList.filter(x=>x.category == category);
+                if(itemsOfCategory.length > 0){
+                    let costOfItmes = itemsOfCategory.map(x => x.amount);
+                    let totalCategoryCost = costOfItmes.reduce((accunulator, currentValue) => accunulator + currentValue);
+
+                    let procentageOfTotal = totalCategoryCost / this.totalSpent;
+                    makePieSlice(c, startRotation, startRotation + (360 * procentageOfTotal), centerOfPie, centerOfPie, radius, "");
+                    startRotation += 360*procentageOfTotal;
+                }
+            }
 
         },
         writeToLocalStorage(data) {
