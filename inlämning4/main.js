@@ -2,15 +2,15 @@ function getSeedData() {
     let seedData = {
         "data": [
             {
-                "transactionAmount": 20,
-                "transactionDate": "2023-03-13",
-                "transactionName": "apple",
+                "amount": 20,
+                "date": "2023-03-13",
+                "name": "apple",
                 "transactionCategory": "food"
             },
             {
-                "transactionAmount": 20,
-                "transactionDate": "2023-03-14",
-                "transactionName": "book",
+                "amount": 20,
+                "date": "2023-03-14",
+                "name": "book",
                 "transactionCategory": "fun"
             }
         ]
