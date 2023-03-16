@@ -5,13 +5,13 @@ function getSeedData() {
                 "amount": 20,
                 "date": "2023-03-13",
                 "name": "apple",
-                "category": "food"
+                "category": "Food"
             },
             {
                 "amount": 20,
                 "date": "2023-03-14",
                 "name": "book",
-                "category": "leisure"
+                "category": "Leisure"
             }
         ]
     }
@@ -47,7 +47,8 @@ const app = Vue.createApp({
             amount: 0,
             date: "",
             category:"",
-            totalSpent: 0
+            totalSpent: 0,
+            categories:["Food","Utilities","Saving","Leisure","Housing","Other"]
         }
     },
 

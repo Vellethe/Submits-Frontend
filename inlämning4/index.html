@@ -18,13 +18,8 @@
         <form @submit.prevent="addExpense">
             <input type="text" id="name" placeholder="Enter product" v-model="name" required>
             <input type="number" id="amount" placeholder="Enter cost" v-model="amount" required>
-            <select name="category" id="category" v-model="category">
-                <option value="food">Food</option>
-                <option value="utilities">Utilities</option>
-                <option value="saving">Saving</option>
-                <option value="leisure">Leisure</option>
-                <option value="housing">Housing</option>
-                <option value="other">Other</option>
+            <select name="category" id="category"  v-model="category">
+                <option v-for="item in categories" >{{item}}</option>
             </select>
             <input type="date" id="date" v-model="date" required>
             <button type="submit">Add Expense</button>
