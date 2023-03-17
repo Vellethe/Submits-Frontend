@@ -54,7 +54,7 @@ const app = Vue.createApp({
 
     computed: {
         totalSpentFormatted() {
-            return this.totalSpent.toFixed(0) + "kr";
+            return this.totalSpent.toFixed(0) + " kr";
         }
     },
 
