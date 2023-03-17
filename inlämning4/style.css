@@ -1,15 +1,48 @@
+h1
+{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: #313131;
+  border-bottom: 5px solid #FFCE00;
+  color: white;
+}
+
+#app
+{
+  text-align: center;
+  background-color: grey;
+}
+
 .totalSpent 
 {
-    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
     position: absolute;
-    top: 0;
+    top: 0; 
     right: 0;
     padding-right: 5%;
     padding-top: 2%;
-}
+    border-radius: 5px;
+    /* box-shadow: inset 0px 0px 6px rgba(0, 0, 0, 0.25);
+    text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25); */
+    /* background-color: #FFCE00;   */
+  }
 
-#name, #amount, #date
+ table.expenses
+ {
+    color: white;
+    margin: 0 auto;
+    width: 50%;
+    margin-top: 1%;
+     background-color: red; 
+ }
+
+#name, #amount, #date, #category
 {
-  justify-content: space-between;
-  align-items: center;
-}
+  font-size: 20px;
+  margin: 2px;
+   border: none; 
+} 

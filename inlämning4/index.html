@@ -13,19 +13,19 @@
 
 <body>
     <h1>Personal expense tracker</h1>
-    <!-- <div class="totalSpent">{{ totalSpent }}kr</div> -->
     <div id="app">
+
         <form @submit.prevent="addExpense">
             <input type="text" id="name" placeholder="Enter product" v-model="name" required>
             <input type="number" id="amount" placeholder="Enter cost" v-model="amount" required>
-            <select name="category" id="category"  v-model="category">
-                <option v-for="item in categories" >{{item}}</option>
+            <select name="category" id="category" v-model="category">
+                <option v-for="item in categories">{{item}}</option>
             </select>
             <input type="date" id="date" v-model="date" required>
             <button type="submit">Add Expense</button>
         </form>
-        <h2>Expense list</h2>
-        <table>
+
+        <table class="expenses">
             <tr>
                 <th>Product</th>
                 <th>Cost</th>
@@ -38,17 +38,14 @@
                 <td>{{ expense.category }}</td>
                 <td>{{ expense.date }}</td>
                 <td>
-                <button @click="deleteExpense(index)">Delete</button>
+                    <button @click="deleteExpense(index)">Delete</button>
                 </td>
             </tr>
         </table>
 
-        <div class="totalSpent">{{ totalSpent }}kr</div>
-
+        <div class="totalSpent">{{ totalSpentFormatted }} kr</div>
         <canvas id="pieCanvas" width="200" height="200"></canvas>
         <button @click="updatePie">test pie</button>
-
-
     </div>
 
 </body>
