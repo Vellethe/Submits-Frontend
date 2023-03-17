@@ -29,7 +29,7 @@ function makePieSlice(c, startAngle, endAngle, centerX, centerY, radius, color) 
 
     c.arc(centerX, centerY, radius, degreeToRadian(startAngle - 90), degreeToRadian(endAngle - 90));
     c.closePath();
-    c.fillStyle = "green";
+    c.fillStyle = color;
     c.fill();
     c.stroke();
 
@@ -48,7 +48,8 @@ const app = Vue.createApp({
             date: "",
             category:"",
             totalSpent:0,
-            categories:["Food","Utilities","Saving","Leisure","Housing","Other"]
+            categories:["Food","Utilities","Saving","Leisure","Housing","Other"],
+            pieColors:["Green","Yellow","Purple","Blue","Orange","Gray"]
         }
     },
 
@@ -109,7 +110,7 @@ const app = Vue.createApp({
                     let totalCategoryCost = costOfItmes.reduce((accunulator, currentValue) => accunulator + currentValue);
 
                     let procentageOfTotal = totalCategoryCost / this.totalSpent;
-                    makePieSlice(c, startRotation, startRotation + (360 * procentageOfTotal), centerOfPie, centerOfPie, radius, "");
+                    makePieSlice(c, startRotation, startRotation + (360 * procentageOfTotal), centerOfPie, centerOfPie, radius, this.pieColors[this.categories.indexOf(category)]);
                     startRotation += 360*procentageOfTotal;
                 }
             }
