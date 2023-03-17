@@ -22,18 +22,38 @@ function degreeToRadian(degree) {
     return (Math.PI / 180) * degree
 }
 
-function makePieSlice(c, startAngle, endAngle, centerX, centerY, radius, color) {
+function findOutsideOfCricle(radians, centerX, centerY, radius) {
+    let x = radius * Math.sin(radians) + centerX;
+    let y = radius * Math.cos(radians) + centerY;
+
+    return { x: x, y: y }
+}
+
+function makePieSlice(c, startAngle, endAngle, centerX, centerY, radius, color, text) {
     c.beginPath();
     c.moveTo(centerX, centerY);
 
-
+    //draw a pie slice
     c.arc(centerX, centerY, radius, degreeToRadian(startAngle - 90), degreeToRadian(endAngle - 90));
     c.closePath();
     c.fillStyle = color;
     c.fill();
     c.stroke();
 
+    //draw line from outside of circle
+    let differnce = (endAngle - startAngle-90);
+    let outsideOfCircle = findOutsideOfCricle(degreeToRadian(startAngle + (differnce / 2)), centerX, centerY, radius);
 
+
+    let outsideOfCircle2 = findOutsideOfCricle(degreeToRadian(startAngle + (differnce / 2)), centerX, centerY, radius + 20);
+    c.beginPath();
+    c.moveTo(outsideOfCircle.x, outsideOfCircle.y);
+    c.lineTo(outsideOfCircle2.x, outsideOfCircle2.y);
+    c.stroke();
+
+    //add text to line
+
+    c.strokeText(text,outsideOfCircle2.x,outsideOfCircle2.y);
 }
 
 
@@ -46,10 +66,10 @@ const app = Vue.createApp({
             name: "",
             amount: 0,
             date: "",
-            category:"",
-            totalSpent:0,
-            categories:["Food","Utilities","Saving","Leisure","Housing","Other"],
-            pieColors:["Green","Yellow","Purple","Blue","Orange","Gray"]
+            category: "",
+            totalSpent: 0,
+            categories: ["Food", "Utilities", "Saving", "Leisure", "Housing", "Other"],
+            pieColors: ["Green", "Yellow", "Purple", "Blue", "Orange", "Gray"]
         }
     },
 
@@ -66,7 +86,7 @@ const app = Vue.createApp({
                 name: this.name,
                 amount: parseFloat(this.amount),
                 date: this.date,
-                category:this.category
+                category: this.category
             }
             this.transactionList.push(newExpense);
             this.writeToLocalStorage(this.transactionList);
@@ -101,17 +121,20 @@ const app = Vue.createApp({
             let radius = 50;
             let centerOfPie = 100;
             let startRotation = 0;
-            c.clearRect(0,0,c.canvas.width,c.canvas.height);
+            c.clearRect(0, 0, c.canvas.width, c.canvas.height);
 
             for (let category of this.categories) {
-                let itemsOfCategory = this.transactionList.filter(x=>x.category == category);
-                if(itemsOfCategory.length > 0){
+                let itemsOfCategory = this.transactionList.filter(x => x.category == category);
+                if (itemsOfCategory.length > 0) {
                     let costOfItmes = itemsOfCategory.map(x => x.amount);
                     let totalCategoryCost = costOfItmes.reduce((accunulator, currentValue) => accunulator + currentValue);
 
                     let procentageOfTotal = totalCategoryCost / this.totalSpent;
-                    makePieSlice(c, startRotation, startRotation + (360 * procentageOfTotal), centerOfPie, centerOfPie, radius, this.pieColors[this.categories.indexOf(category)]);
-                    startRotation += 360*procentageOfTotal;
+
+                    let curentIndex = this.categories.indexOf(category);
+
+                    makePieSlice(c, startRotation, startRotation + (360 * procentageOfTotal), centerOfPie, centerOfPie, radius, this.pieColors[curentIndex],category);
+                    startRotation += 360 * procentageOfTotal;
                 }
             }
 
