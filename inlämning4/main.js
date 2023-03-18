@@ -112,8 +112,29 @@ const app = Vue.createApp({
             }
         },
 
+getgroupOnMonth(){
+    let output = {};
+    for(let item of this.transactionList )
+    {
+        let dateObj = new Date(item.date);
+        let propName = dateObj.getFullYear()+" "+dateObj.getMonth();
+        if(output.hasOwnProperty(propName))
+        {
+            output[propName].push(item);
+        }
+        else{
+            Object.assign(output,{[propName]:[item]})
+        }
+    }
+    return output;
+},
 
 
+sortListOnDate(list){
+    return list.sort(function(a,b){
+        return new Date(b.date) - new Date(a.date);
+    })
+},
 
         updatePie() {
 
