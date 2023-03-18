@@ -23,8 +23,8 @@ function degreeToRadian(degree) {
 }
 
 function findOutsideOfCricle(radians, centerX, centerY, radius) {
-    let x = radius * Math.sin(radians) + centerX;
-    let y = radius * Math.cos(radians) + centerY;
+    let x = centerX + radius * Math.sin(radians);
+    let y = centerY - radius * Math.cos(radians);
 
     return { x: x, y: y }
 }
@@ -41,7 +41,7 @@ function makePieSlice(c, startAngle, endAngle, centerX, centerY, radius, color, 
     c.stroke();
 
     //draw line from outside of circle
-    let differnce = (endAngle - startAngle-90);
+    let differnce = (endAngle - startAngle);
     let outsideOfCircle = findOutsideOfCricle(degreeToRadian(startAngle + (differnce / 2)), centerX, centerY, radius);
 
 
@@ -116,10 +116,13 @@ const app = Vue.createApp({
 
 
         updatePie() {
+
+            this.totalSpent = this.transactionList.reduce((total, expense) => total + expense.amount, 0);
+
             let canvas = document.querySelector("#pieCanvas");
             let c = canvas.getContext("2d");
-            let radius = 50;
-            let centerOfPie = 100;
+            let radius = c.canvas.width/4;
+            let centerOfPie = c.canvas.width/2;
             let startRotation = 0;
             c.clearRect(0, 0, c.canvas.width, c.canvas.height);
 
