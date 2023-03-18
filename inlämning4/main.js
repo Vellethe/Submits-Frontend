@@ -114,18 +114,19 @@ const app = Vue.createApp({
 
 getgroupOnMonth(){
     let output = {};
-    for(let item of this.transactionList )
-    {
+    this.transactionList.forEach(function(item,index){
+
         let dateObj = new Date(item.date);
         let propName = dateObj.getFullYear()+" "+dateObj.getMonth();
         if(output.hasOwnProperty(propName))
         {
-            output[propName].push(item);
+            output[propName].push({data:item,index:index});
         }
         else{
-            Object.assign(output,{[propName]:[item]})
+            output[propName] = [{data:item,index:index}];
         }
-    }
+    });
+
     return output;
 },
 
