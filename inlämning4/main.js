@@ -75,6 +75,8 @@ const app = Vue.createApp({
 
     computed: {
         totalSpentFormatted() {
+            this.totalSpent = this.transactionList.reduce((total, expense) => 
+            total + expense.amount, 0);
             return this.totalSpent.toFixed(0) + " kr";
         }
     },
@@ -94,7 +96,8 @@ const app = Vue.createApp({
             this.amount = 0;
             this.date = '';
             // reduce method sums up the amount of each expense in transactionList and then adds it to totalSpent 
-            this.totalSpent = this.transactionList.reduce((total, expense) => total + expense.amount, 0);
+            this.totalSpent = this.transactionList.reduce((total, expense) => 
+            total + expense.amount, 0);
             this.updatePie();
         },
 
