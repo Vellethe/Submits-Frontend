@@ -106,11 +106,11 @@ const app = Vue.createApp({
             this.updatePie();
         },
 
-        computed: {
-            sortedItems: function () {
-                return this.items.sort((a, b) => new Date(a.date) - new Date(b.date))
-            }
-        },
+        // computed: {
+        //     sortedItems: function () {
+        //         return this.items.sort((a, b) => new Date(a.date) - new Date(b.date))
+        //     }
+        // },
 
 getgroupOnMonth(){
     let output = {};
@@ -131,11 +131,11 @@ getgroupOnMonth(){
 },
 
 
-sortListOnDate(list){
-    return list.sort(function(a,b){
-        return new Date(b.date) - new Date(a.date);
-    })
-},
+        sortListByDate()
+        {
+            this.transactionList = this.transactionList.sort((a, b) => 
+            new Date(b.date) - new Date(a.date));
+        },
 
         updatePie() {
 
