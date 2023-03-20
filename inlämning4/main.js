@@ -29,8 +29,8 @@ function findOutsideOfCricle(radians, centerX, centerY, radius) {
     return { x: x, y: y }
 }
 
-function numberToMonth(num){
-    let months = [ "January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December" ];
+function numberToMonth(num) {
+    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     return months[num];
 }
 
@@ -57,9 +57,91 @@ function makePieSlice(c, startAngle, endAngle, centerX, centerY, radius, color, 
     c.stroke();
 
     //add text to line
+    c.font = "12px Arial"
 
-    c.strokeText(text, outsideOfCircle2.x, outsideOfCircle2.y);
+    let textSize = c.measureText(text);
+    let heightAproximation = 0;
+
+
+    let temp = RelativeAnchorLocation(startAngle+(differnce/2),textSize.width,heightAproximation)
+    c.strokeText(text, outsideOfCircle2.x+temp.x, outsideOfCircle2.y-temp.y);
 }
+
+function calculateIntersect(p1, p2, p3, p4) {
+    //https://dirask.com/posts/JavaScript-calculate-intersection-point-of-two-lines-for-given-4-points-VjvnAj
+    var c2x = p3.x - p4.x;
+    var c3x = p1.x - p2.x;
+    var c2y = p3.y - p4.y;
+    var c3y = p1.y - p2.y;
+
+    // down part of intersection point formula
+    var d = c3x * c2y - c3y * c2x;
+
+
+    var u1 = p1.x * p2.y - p1.y * p2.x; // (x1 * y2 - y1 * x2)
+    var u4 = p3.x * p4.y - p3.y * p4.x; // (x3 * y4 - y3 * x4)
+
+    // intersection point formula
+
+    var px = (u1 * c2x - c3x * u4) / d;
+    var py = (u1 * c2y - c3y * u4) / d;
+
+    var p = { x: px, y: py };
+
+    return p;
+}
+
+function angleIsBetween(n, a, b) {
+    //https://www.xarg.org/2010/06/is-an-angle-between-two-other-angles/
+	n = (360 + (n % 360)) % 360;
+	a = (3600000 + a) % 360;
+	b = (3600000 + b) % 360;
+
+	if (a < b)
+		return a <= n && n <= b;
+	return a <= n || n <= b;
+}
+
+
+function RelativeAnchorLocation(angle, width, height) {
+    //p1           p2    
+    //
+    //p3           p4
+    let point1 = { x: width / 2, y: height / 2 };
+    let point2 = { x: -width / 2, y: height / 2 };
+    let point3 = { x: width / 2, y: -height / 2 };
+    let point4 = { x: -width / 2, y: -height / 2 };
+
+
+    //-90 to set 0 angle at top  +360 %360 to acaount for negative numbers
+    let angleToP1 = (Math.atan2(point1.y, point1.x) * (180 / Math.PI) - 90+360)%360;
+    let angleToP2 = (Math.atan2(point2.y, point2.x) * (180 / Math.PI) - 90+360)%360;
+    let angleToP3 = (Math.atan2(point3.y, point3.x) * (180 / Math.PI) - 90+360)%360;
+    let angleToP4 = (Math.atan2(point4.y, point4.x) * (180 / Math.PI) - 90+360)%360;
+
+
+    let result = { x: 0, y: 0 };
+
+    let centerPoint = { x: 0, y: 0 };
+    let farPoint = findOutsideOfCricle(degreeToRadian(angle), 0, 0, 300);
+    //top, right down left
+    if (angleIsBetween(angle, angleToP1, angleToP2)) {
+        result = calculateIntersect(point1, point2, centerPoint, farPoint);
+    }
+    else if (angleIsBetween(angle, angleToP2, angleToP3, farPoint)) {
+
+        result = calculateIntersect(point2, point3, centerPoint, farPoint);
+    }
+    else if (angleIsBetween(angle, angleToP3, angleToP4)) {
+        result = calculateIntersect(point3, point4, centerPoint, farPoint);
+    }
+    else {
+        result = calculateIntersect(point4, point1, centerPoint, farPoint);
+    }
+    console.log({x:result.x-(width/2),y:result.y-(height/2)})
+    return {x:result.x-(width/2),y:result.y-(height/2)}
+}
+
 
 
 const app = Vue.createApp({
@@ -129,7 +211,7 @@ const app = Vue.createApp({
 
                 let dateObj = new Date(item.date);
                 let propName = dateObj.getFullYear() + " " + numberToMonth(dateObj.getMonth());
-                
+
                 //add a category for all
                 if (output.hasOwnProperty("show all")) {
                     output["show all"].push({ data: item, index: index });
@@ -151,9 +233,9 @@ const app = Vue.createApp({
             return output;
         },
 
-        getDataToShow(){
+        getDataToShow() {
             return this.getgroupOnMonth()[this.monthToShow];
-            
+
         },
 
 
