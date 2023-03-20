@@ -24,6 +24,10 @@
             <button type="submit">Add Expense</button>
         </form>
 
+        <select name="monthToShow" id="monthToShow" v-model="monthToShow">
+            <option v-for="(group,name) in getgroupOnMonth()">{{name}}</option>
+        </select>
+
         <table class="expenses">
             <thead>
                 <tr>
@@ -33,9 +37,7 @@
                     <th>Date</th>
                 </tr>
             </thead>
-            <tbody v-for="(group,name) in getgroupOnMonth()">
-                <tr class="headerRow"><td>{{name}}</td></tr>
-                <tr v-for="(expense, index) in group" :key="index">
+                <tr v-for="expense in getDataToShow()">
                     <td>{{ expense.data.name }}</td>
                     <td>{{ expense.data.amount }}</td>
                     <td>{{ expense.data.category }}</td>
@@ -49,7 +51,6 @@
         </table>
 
         <div class="totalSpent">{{ totalSpentFormatted }}</div>
-        <button @click="sortListByDate">Sort by date</button>
 
         <canvas id="pieCanvas" width="200" height="200"></canvas>
         <button @click="updatePie">test pie</button>

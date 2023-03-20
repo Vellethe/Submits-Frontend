@@ -29,6 +29,11 @@ function findOutsideOfCricle(radians, centerX, centerY, radius) {
     return { x: x, y: y }
 }
 
+function numberToMonth(num){
+    let months = [ "January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December" ];
+    return months[num];
+}
+
 function makePieSlice(c, startAngle, endAngle, centerX, centerY, radius, color, text) {
     c.beginPath();
     c.moveTo(centerX, centerY);
@@ -53,7 +58,7 @@ function makePieSlice(c, startAngle, endAngle, centerX, centerY, radius, color, 
 
     //add text to line
 
-    c.strokeText(text,outsideOfCircle2.x,outsideOfCircle2.y);
+    c.strokeText(text, outsideOfCircle2.x, outsideOfCircle2.y);
 }
 
 
@@ -69,14 +74,15 @@ const app = Vue.createApp({
             category: "",
             totalSpent: 0,
             categories: ["Food", "Utilities", "Saving", "Leisure", "Housing", "Other"],
-            pieColors: ["Green", "Yellow", "Purple", "Blue", "Orange", "Gray"]
+            pieColors: ["Green", "Yellow", "Purple", "Blue", "Orange", "Gray"],
+            monthToShow: "show all"
         }
     },
 
     computed: {
         totalSpentFormatted() {
-            this.totalSpent = this.transactionList.reduce((total, expense) => 
-            total + expense.amount, 0);
+            this.totalSpent = this.transactionList.reduce((total, expense) =>
+                total + expense.amount, 0);
             return this.totalSpent.toFixed(0) + " kr";
         }
     },
@@ -91,14 +97,16 @@ const app = Vue.createApp({
                 category: this.category
             }
             this.transactionList.push(newExpense);
-            this.writeToLocalStorage(this.transactionList);
             this.name = '';
             this.amount = 0;
             this.date = '';
             // reduce method sums up the amount of each expense in transactionList and then adds it to totalSpent 
-            this.totalSpent = this.transactionList.reduce((total, expense) => 
-            total + expense.amount, 0);
+            this.totalSpent = this.transactionList.reduce((total, expense) =>
+                total + expense.amount, 0);
             this.updatePie();
+            this.transactionList = this.transactionList.sort((a, b) =>
+                new Date(b.date) - new Date(a.date));
+            this.writeToLocalStorage(this.transactionList);
         },
 
         deleteExpense(index) {
@@ -115,31 +123,40 @@ const app = Vue.createApp({
         //     }
         // },
 
-getgroupOnMonth(){
-    let output = {};
-    this.transactionList.forEach(function(item,index){
+        getgroupOnMonth() {
+            let output = {};
+            this.transactionList.forEach(function (item, index) {
 
-        let dateObj = new Date(item.date);
-        let propName = dateObj.getFullYear()+" "+(dateObj.getMonth()+1);
-        if(output.hasOwnProperty(propName))
-        {
-            output[propName].push({data:item,index:index});
-        }
-        else{
-            output[propName] = [{data:item,index:index}];
-        }
-        console.log(output);
-    });
+                let dateObj = new Date(item.date);
+                let propName = dateObj.getFullYear() + " " + numberToMonth(dateObj.getMonth());
+                
+                //add a category for all
+                if (output.hasOwnProperty("show all")) {
+                    output["show all"].push({ data: item, index: index });
+                }
+                else {
+                    output["show all"] = [{ data: item, index: index }];
+                }
 
-    return output;
-},
+                if (output.hasOwnProperty(propName)) {
+                    output[propName].push({ data: item, index: index });
+                }
+                else {
+                    output[propName] = [{ data: item, index: index }];
+                }
 
 
-        sortListByDate()
-        {
-            this.transactionList = this.transactionList.sort((a, b) => 
-            new Date(b.date) - new Date(a.date));
+            });
+
+            return output;
         },
+
+        getDataToShow(){
+            return this.getgroupOnMonth()[this.monthToShow];
+            
+        },
+
+
 
         updatePie() {
 
@@ -147,8 +164,8 @@ getgroupOnMonth(){
 
             let canvas = document.querySelector("#pieCanvas");
             let c = canvas.getContext("2d");
-            let radius = c.canvas.width/4;
-            let centerOfPie = c.canvas.width/2;
+            let radius = c.canvas.width / 4;
+            let centerOfPie = c.canvas.width / 2;
             let startRotation = 0;
             c.clearRect(0, 0, c.canvas.width, c.canvas.height);
 
@@ -162,7 +179,7 @@ getgroupOnMonth(){
 
                     let curentIndex = this.categories.indexOf(category);
 
-                    makePieSlice(c, startRotation, startRotation + (360 * procentageOfTotal), centerOfPie, centerOfPie, radius, this.pieColors[curentIndex],category);
+                    makePieSlice(c, startRotation, startRotation + (360 * procentageOfTotal), centerOfPie, centerOfPie, radius, this.pieColors[curentIndex], category);
                     startRotation += 360 * procentageOfTotal;
                 }
             }
