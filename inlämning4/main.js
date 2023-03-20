@@ -120,7 +120,7 @@ getgroupOnMonth(){
     this.transactionList.forEach(function(item,index){
 
         let dateObj = new Date(item.date);
-        let propName = dateObj.getFullYear()+" "+dateObj.getMonth();
+        let propName = dateObj.getFullYear()+" "+(dateObj.getMonth()+1);
         if(output.hasOwnProperty(propName))
         {
             output[propName].push({data:item,index:index});
@@ -128,6 +128,7 @@ getgroupOnMonth(){
         else{
             output[propName] = [{data:item,index:index}];
         }
+        console.log(output);
     });
 
     return output;

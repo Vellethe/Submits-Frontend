@@ -34,12 +34,12 @@
                 </tr>
             </thead>
             <tbody v-for="(group,name) in getgroupOnMonth()">
-                <tr><td>{{name}}</td></tr>
-                <tr v-for="(expense, index) in transactionList" :key="index">
-                    <td>{{ expense.name }}</td>
-                    <td>{{ expense.amount }}</td>
-                    <td>{{ expense.category }}</td>
-                    <td>{{ expense.date }}</td>
+                <tr class="headerRow"><td>{{name}}</td></tr>
+                <tr v-for="(expense, index) in group" :key="index">
+                    <td>{{ expense.data.name }}</td>
+                    <td>{{ expense.data.amount }}</td>
+                    <td>{{ expense.data.category }}</td>
+                    <td>{{ expense.data.date }}</td>
                     <td>
                         <button @click="deleteExpense(expense.index)">Delete</button>
                     </td>
