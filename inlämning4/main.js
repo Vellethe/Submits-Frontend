@@ -197,14 +197,18 @@ const app = Vue.createApp({
             this.totalSpent = this.transactionList.reduce((total, expense) => total + expense.amount, 0);
             this.writeToLocalStorage(this.transactionList);
             this.updatePie();
+            
         },
 
-        // computed: {
-        //     sortedItems: function () {
-        //         return this.items.sort((a, b) => new Date(a.date) - new Date(b.date))
-        //     }
-        // },
-
+        // deleteByMonth(month, year) 
+        // {
+        //     let newList = this.transactionList.filter((item) => {
+        //     let dateObj = new Date(item.date);
+        //     return dateObj.getFullYear() !== year || dateObj.getMonth() !== month + 1;
+        //     });
+        //     this.transactionList = newList;
+        //     },
+          
         getgroupOnMonth() {
             let output = {};
             this.transactionList.forEach(function (item, index) {
@@ -237,7 +241,6 @@ const app = Vue.createApp({
             return this.getgroupOnMonth()[this.monthToShow];
 
         },
-
 
 
         updatePie() {
