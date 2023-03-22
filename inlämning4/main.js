@@ -45,6 +45,24 @@ function makePieSlice(c, startAngle, endAngle, centerX, centerY, radius, color, 
     c.fill();
     c.stroke();
 
+    //case 100%
+    if(startAngle == 0 && endAngle == 360){
+        c.beginPath();
+        c.moveTo(centerX,centerY);
+
+        let outsideOfRing = findOutsideOfCricle(0, centerX, centerY, radius - 1);
+
+        c.lineTo(outsideOfRing.x,outsideOfRing.y);
+        c.lineWidth = 2;
+        c.strokeStyle = color;
+        c.stroke();
+
+        c.strokeStyle = "black";
+        c.lineWidth = 1;
+    }
+
+
+
     //draw line from outside of circle
     let differnce = (endAngle - startAngle);
     let outsideOfCircle = findOutsideOfCricle(degreeToRadian(startAngle + (differnce / 2)), centerX, centerY, radius);
@@ -55,6 +73,8 @@ function makePieSlice(c, startAngle, endAngle, centerX, centerY, radius, color, 
     c.moveTo(outsideOfCircle.x, outsideOfCircle.y);
     c.lineTo(outsideOfCircle2.x, outsideOfCircle2.y);
     c.stroke();
+
+
 
     //add text to line
     c.font = "12px Arial"
@@ -244,8 +264,8 @@ const app = Vue.createApp({
 
 
         updatePie() {
-
-            this.totalSpent = this.transactionList.reduce((total, expense) => total + expense.amount, 0);
+            let toShow = this.getgroupOnMonth()[this.monthToShow].map(x=>x.data);
+            this.totalSpent = toShow.reduce((total, expense) => total + expense.amount, 0);
 
             let canvas = document.querySelector("#pieCanvas");
             let c = canvas.getContext("2d");
@@ -255,7 +275,7 @@ const app = Vue.createApp({
             c.clearRect(0, 0, c.canvas.width, c.canvas.height);
 
             for (let category of this.categories) {
-                let itemsOfCategory = this.transactionList.filter(x => x.category == category);
+                let itemsOfCategory = toShow.filter(x => x.category == category);
                 if (itemsOfCategory.length > 0) {
                     let costOfItmes = itemsOfCategory.map(x => x.amount);
                     let totalCategoryCost = costOfItmes.reduce((accunulator, currentValue) => accunulator + currentValue);
