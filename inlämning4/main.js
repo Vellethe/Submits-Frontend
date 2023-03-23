@@ -186,7 +186,8 @@ const app = Vue.createApp({
     },
     computed: {
         totalSpentFormatted() {
-            this.totalSpent = this.transactionList.reduce((total, expense) =>
+            let transactions = this.getgroupOnMonth()[this.monthToShow].map(x=>x.data);
+            this.totalSpent = transactions.reduce((total, expense) =>
                 total + expense.amount, 0);
             return this.totalSpent.toFixed(0) + " kr";
         }
