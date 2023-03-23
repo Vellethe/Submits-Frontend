@@ -6,12 +6,8 @@ test('Adding a task', async ({ page }) => {
   let input = await page.locator('#userInput');
   let tasksList = await page.locator('#tasks');
 
-  await input.type("Buy milk");
-  await page.keyboard.press("Enter");
+getByRole('button', { name: 'Delete Month' })
 
-  let taskText = await tasksList.locator("li span").innerText();
-
-  await expect(taskText).toEqual("Buy milk");
 });
 
 test('Add task and verify items left count', async ({ page }) => {

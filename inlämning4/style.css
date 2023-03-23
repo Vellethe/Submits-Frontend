@@ -1,51 +1,56 @@
-h1
-{
+header {
+  display: grid;
+  grid-template: "a b";
+  background-color: #313131;
+  border-bottom: 5px solid #FFCE00;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 30px;
-  background-color: #313131;
-  border-bottom: 5px solid #FFCE00;
   color: white;
+  grid-area: a;
 }
 
-#app, body
-{
+
+#app,
+body {
   text-align: center;
   background-color: #A9A9A9;
 }
 
-.totalSpent 
-{
-    color: white;
-    font-weight: bold;
-    font-size: 30px;
-    position: absolute;
-    top: 0; 
-    right: 0;
-    padding-right: 5%;
-    padding-top: 2%;
-    border-radius: 5px;
-    /* box-shadow: inset 0px 0px 6px rgba(0, 0, 0, 0.25);
+.totalSpent {
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  border-radius: 5px;
+  padding: 15px 30px;
+  /* box-shadow: inset 0px 0px 6px rgba(0, 0, 0, 0.25);
     text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25); */
-    /* background-color: #FFCE00;   */
-  }
+  /* background-color: #FFCE00;   */
+  grid-area: b;
+}
 
- table.expenses
- {
-    color: rgb(0, 0, 0);
-    margin: 0 auto;
-    width: 50%;
-    margin-top: 1%;
-    font-weight: bold;
-    font-size: 20px;
-    /* background-color: red;  */
- }
+table.expenses {
+  color: rgb(0, 0, 0);
+  margin: 0 auto;
+  width: 50%;
+  margin-top: 1%;
+  font-weight: bold;
+  font-size: 20px;
+  /* background-color: red;  */
+}
 
-#name, #amount, #date, #category
-{
+#name,
+#amount,
+#date,
+#category {
   font-size: 20px;
   margin: 2px;
   border: none;
   outline: none;
-} 
+}

@@ -181,6 +181,9 @@ const app = Vue.createApp({
         }
     },
 
+    mounted(){
+        this.updatePie();
+    },
     computed: {
         totalSpentFormatted() {
             this.totalSpent = this.transactionList.reduce((total, expense) =>
@@ -220,15 +223,20 @@ const app = Vue.createApp({
             
         },
 
-        // deleteByMonth(month, year) 
-        // {
-        //     let newList = this.transactionList.filter((item) => {
-        //     let dateObj = new Date(item.date);
-        //     return dateObj.getFullYear() !== year || dateObj.getMonth() !== month + 1;
-        //     });
-        //     this.transactionList = newList;
-        //     },
-          
+        deleteByMonth() {
+            let newList = [];
+            let toRemove = this.getgroupOnMonth()[this.monthToShow].map(x=>x.data.date);
+           for(let item of this.transactionList){
+            if(!toRemove.includes(item.date)){
+                newList.push(item);
+            }
+           } 
+            this.transactionList = newList;
+            this.monthToShow = "show all";
+            this.writeToLocalStorage(this.transactionList);
+            this.updatePie();
+        },
+
         getgroupOnMonth() {
             let output = {};
             this.transactionList.forEach(function (item, index) {
@@ -251,23 +259,27 @@ const app = Vue.createApp({
                     output[propName] = [{ data: item, index: index }];
                 }
 
-
             });
-
             return output;
         },
 
         getDataToShow() {
+            this.updatePie();
             return this.getgroupOnMonth()[this.monthToShow];
-
         },
 
 
         updatePie() {
-            let toShow = this.getgroupOnMonth()[this.monthToShow].map(x=>x.data);
+            let toShow = this.getgroupOnMonth()[this.monthToShow].map(x => x.data);
             this.totalSpent = toShow.reduce((total, expense) => total + expense.amount, 0);
 
             let canvas = document.querySelector("#pieCanvas");
+
+            //canvas somtimes is not found dont know why
+            if(canvas ==undefined){
+                return;
+            }
+
             let c = canvas.getContext("2d");
             let radius = c.canvas.width / 4;
             let centerOfPie = c.canvas.width / 2;
@@ -302,5 +314,5 @@ const app = Vue.createApp({
             }
             return undefined;
         },
-    }
+    },
 }).mount('#app');

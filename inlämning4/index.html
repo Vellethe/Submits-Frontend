@@ -12,8 +12,14 @@
 </head>
 
 <body>
-    <h1>Personal expense tracker</h1>
     <div id="app">
+        <header>
+        
+            <h1>Personal expense tracker</h1>
+        
+            <div class="totalSpent">{{ totalSpentFormatted }}</div>
+        
+        </header>
         <form @submit.prevent="addExpense">
             <input type="text" id="name" placeholder="Enter product" v-model="name" required>
             <input type="number" id="amount" placeholder="Enter cost" v-model="amount" required>
@@ -23,11 +29,11 @@
             <input type="date" id="date" v-model="date" required>
             <button type="submit">Add Expense</button>
         </form>
-
+        
         <select name="monthToShow" id="monthToShow" v-model="monthToShow">
             <option v-for="(group,name) in getgroupOnMonth()">{{name}}</option>
         </select>
-
+        
         <table class="expenses">
             <thead>
                 <tr>
@@ -37,28 +43,24 @@
                     <th>Date</th>
                 </tr>
             </thead>
-                <tr v-for="expense in getDataToShow()">
-                    <td>{{ expense.data.name }}</td>
-                    <td>{{ expense.data.amount }}</td>
-                    <td>{{ expense.data.category }}</td>
-                    <td>{{ expense.data.date }}</td>
-                    <td>
-                        <button @click="deleteExpense(expense.index)">Delete</button>
-                    </td>
-                </tr>
+            <tr v-for="expense in getDataToShow()">
+                <td>{{ expense.data.name }}</td>
+                <td>{{ expense.data.amount }}</td>
+                <td>{{ expense.data.category }}</td>
+                <td>{{ expense.data.date }}</td>
+                <td>
+                    <button @click="deleteExpense(expense.index)">Delete</button>
+                </td>
+            </tr>
             </tbody>
-
+        
         </table>
-
-        <div class="totalSpent">{{ totalSpentFormatted }}</div>
+        
         <button @click="deleteByMonth(month, year)">Delete Month</button>
-
+        
         <canvas id="pieCanvas" width="200" height="200"></canvas>
-        <button @click="updatePie">test pie</button>
-
-
-    </div>
-
-</body>
-
-</html>
+        </div>
+        
+        </body>
+        
+        </html>
