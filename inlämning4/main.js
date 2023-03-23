@@ -239,19 +239,14 @@ const app = Vue.createApp({
         },
 
         getgroupOnMonth() {
-            let output = {};
+            let output = {"show all":[]};
             this.transactionList.forEach(function (item, index) {
 
                 let dateObj = new Date(item.date);
                 let propName = dateObj.getFullYear() + " " + numberToMonth(dateObj.getMonth());
 
                 //add a category for all
-                if (output.hasOwnProperty("show all")) {
-                    output["show all"].push({ data: item, index: index });
-                }
-                else {
-                    output["show all"] = [{ data: item, index: index }];
-                }
+                output["show all"].push({ data: item, index: index });
 
                 if (output.hasOwnProperty(propName)) {
                     output[propName].push({ data: item, index: index });
