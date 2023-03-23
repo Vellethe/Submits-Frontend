@@ -34,6 +34,7 @@
             <option v-for="(group,name) in getgroupOnMonth()">{{name}}</option>
         </select>
         
+        <button @click="deleteByMonth()">Delete curent month</button>
         <table class="expenses">
             <thead>
                 <tr>
@@ -56,7 +57,6 @@
         
         </table>
         
-        <button @click="deleteByMonth()">Delete Month</button>
         
         <canvas id="pieCanvas" width="200" height="200"></canvas>
     </div>
