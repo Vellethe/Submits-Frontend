@@ -220,14 +220,12 @@ const app = Vue.createApp({
             
         },
 
-        // deleteByMonth(month, year) 
-        // {
-        //     let newList = this.transactionList.filter((item) => {
-        //     let dateObj = new Date(item.date);
-        //     return dateObj.getFullYear() !== year || dateObj.getMonth() !== month + 1;
-        //     });
-        //     this.transactionList = newList;
-        //     },
+    //     deleteByMonth(month) {
+    //   this.transactions = this.transactions.filter((transaction) => {
+    //     const transactionMonth = transaction.date.split('-')[1];
+    //     return transactionMonth !== month;
+    //   });
+    // },
           
         getgroupOnMonth() {
             let output = {};
