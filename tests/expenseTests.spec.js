@@ -20,55 +20,54 @@ test('Adding expense', async ({ page }) => {
 
   let spentValue = await totalSpent.textContent();
   await expect(spentValue).toEqual("60 kr");
-  //await page.keyboard.press("Enter");
-
 
 });
 
-test('Add task and verify items left count', async ({ page }) => {
+test('delete all button', async ({ page }) => {
 
   await page.goto("http://127.0.0.1:5500/Inlämning4/");
+  let nameFeild = await page.locator('#name');
+  let costFeild = await page.locator('#amount');
+  let categorySelector = await page.locator('#category');
+  let dateFeild = await page.locator('#date');
+  let submitButton = await page.locator('[type=submit]');
+  let deleteAllButton = await page.locator('#deleteAllButton');
 
-  let input = await page.locator('#userInput');
-  let tasksList = await page.locator('#tasks');
-  let itemsLeft = await page.locator(".itemsLeft")
+  let totalSpent = await page.locator('.totalSpent');
 
-  await input.type("Buy milk");
-  await page.keyboard.press("Enter");
 
-  let itemsLeftText = await itemsLeft.innerText();
-  await expect(itemsLeftText).toEqual("1 item left")
+  await deleteAllButton.click();
+  let spentValue = await totalSpent.textContent();
+  await expect(spentValue).toEqual("0 kr");
 
-  let checkbox = await tasksList.locator("li input");
-  await checkbox.check();
+  });
 
-  itemsLeftText = await itemsLeft.innerText();
-  await expect(itemsLeftText).toEqual("0 items left")
-});
 
-test('Add 3 tasks and check so that number of tasks works', async ({page}) =>{
+test('filter on month', async ({page}) =>{
 
   await page.goto("http://127.0.0.1:5500/Inlämning4/");
+  let nameFeild = await page.locator('#name');
+  let costFeild = await page.locator('#amount');
+  let categorySelector = await page.locator('#category');
+  let dateFeild = await page.locator('#date');
+  let submitButton = await page.locator('[type=submit]');
+  let deleteAllButton = await page.locator('#deleteAllButton');
+  let monthSelector = await page.locator('#monthToShow');
 
-  let input = await page.locator('#userInput');
-  let tasksList = await page.locator('#tasks');
-  let itemsLeft = await page.locator(".itemsLeft")
-
-  await input.type("Buy milk");
-  await page.keyboard.press("Enter");
-
-  await input.type("Buy butter");
-  await page.keyboard.press("Enter");
-
-  await input.type("Buy sugar");
-  await page.keyboard.press("Enter");
+  let totalSpent = await page.locator('.totalSpent');
   
- 
-  let checkbox = await tasksList.locator("li:first-child input");
-  await checkbox.check();
+  await nameFeild.fill("rent");
+  await costFeild.fill("20");
+  await categorySelector.selectOption("Housing");
+  await dateFeild.fill('2023-05-11'); 
 
-  let itemsLeftText = await itemsLeft.innerText();
+  await submitButton.click();
+  await monthSelector.selectOption("2023 May");
 
-  await expect(itemsLeftText).toEqual("2 items left")
+  let spentValue = await totalSpent.textContent();
+  await expect(spentValue).toEqual("20 kr");
+
+
+  
 
 })
