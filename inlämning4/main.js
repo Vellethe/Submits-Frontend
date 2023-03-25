@@ -186,7 +186,7 @@ const app = Vue.createApp({
     },
     computed: {
         totalSpentFormatted() {
-            let transactions = this.getgroupOnMonth()[this.monthToShow].map(x => x.data);
+            let transactions = this.getGroupOnMonth()[this.monthToShow].map(x => x.data);
             this.totalSpent = transactions.reduce((total, expense) =>
                 total + expense.amount, 0);
             return this.totalSpent.toFixed(0) + " kr";
@@ -226,7 +226,7 @@ const app = Vue.createApp({
 
         deleteByMonth() {
             let newList = [];
-            let toRemove = this.getgroupOnMonth()[this.monthToShow].map(x => x.data.date);
+            let toRemove = this.getGroupOnMonth()[this.monthToShow].map(x => x.data.date);
             for (let item of this.transactionList) {
                 if (!toRemove.includes(item.date)) {
                     newList.push(item);
@@ -238,7 +238,7 @@ const app = Vue.createApp({
             this.updatePie();
         },
 
-        getgroupOnMonth() {
+        getGroupOnMonth() {
             let output = { "show all": [] };
             this.transactionList.forEach(function (item, index) {
 
@@ -261,12 +261,12 @@ const app = Vue.createApp({
 
         getDataToShow() {
             this.updatePie();
-            return this.getgroupOnMonth()[this.monthToShow];
+            return this.getGroupOnMonth()[this.monthToShow];
         },
 
 
         updatePie() {
-            let toShow = this.getgroupOnMonth()[this.monthToShow].map(x => x.data);
+            let toShow = this.getGroupOnMonth()[this.monthToShow].map(x => x.data);
             this.totalSpent = toShow.reduce((total, expense) => total + expense.amount, 0);
 
             let canvas = document.querySelector("#pieCanvas");

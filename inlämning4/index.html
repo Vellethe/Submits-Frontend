@@ -31,7 +31,7 @@
         </form>
 
         <select name="monthToShow" id="monthToShow" v-model="monthToShow">
-            <option v-for="(group,name) in getgroupOnMonth()">{{name}}</option>
+            <option v-for="(group,name) in getGroupOnMonth()">{{name}}</option>
         </select>
 
         <button @click="deleteByMonth()" id="deleteAllButton">Delete current month</button>
