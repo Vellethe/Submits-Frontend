@@ -14,11 +14,11 @@
 <body>
     <div id="app">
         <header>
-        
+
             <h1>Personal expense tracker</h1>
-        
+
             <div class="totalSpent">{{ totalSpentFormatted }}</div>
-        
+
         </header>
         <form @submit.prevent="addExpense">
             <input type="text" id="name" placeholder="Enter product" v-model="name" required>
@@ -29,11 +29,11 @@
             <input type="date" id="date" v-model="date" required>
             <button type="submit">Add Expense</button>
         </form>
-        
+
         <select name="monthToShow" id="monthToShow" v-model="monthToShow">
             <option v-for="(group,name) in getgroupOnMonth()">{{name}}</option>
         </select>
-        
+
         <button @click="deleteByMonth()" id="deleteAllButton">Delete current month</button>
         <table class="expenses">
             <thead>
@@ -54,10 +54,10 @@
                 </td>
             </tr>
             </tbody>
-        
+
         </table>
-        
-        
+
+
         <canvas id="pieCanvas" width="250" height="250"></canvas>
     </div>
 

@@ -46,13 +46,13 @@ function makePieSlice(c, startAngle, endAngle, centerX, centerY, radius, color, 
     c.stroke();
 
     //case 100%
-    if(startAngle == 0 && endAngle == 360){
+    if (startAngle == 0 && endAngle == 360) {
         c.beginPath();
-        c.moveTo(centerX,centerY);
+        c.moveTo(centerX, centerY);
 
         let outsideOfRing = findOutsideOfCricle(0, centerX, centerY, radius - 1);
 
-        c.lineTo(outsideOfRing.x,outsideOfRing.y);
+        c.lineTo(outsideOfRing.x, outsideOfRing.y);
         c.lineWidth = 2;
         c.strokeStyle = color;
         c.stroke();
@@ -83,8 +83,8 @@ function makePieSlice(c, startAngle, endAngle, centerX, centerY, radius, color, 
     let heightAproximation = 0;
 
 
-    let temp = relativeAnchorLocation(startAngle+(differnce/2),textSize.width,heightAproximation)
-    c.strokeText(text, outsideOfCircle2.x+temp.x, outsideOfCircle2.y-temp.y);
+    let temp = relativeAnchorLocation(startAngle + (differnce / 2), textSize.width, heightAproximation)
+    c.strokeText(text, outsideOfCircle2.x + temp.x, outsideOfCircle2.y - temp.y);
 }
 
 function calculateIntersect(p1, p2, p3, p4) {
@@ -113,13 +113,13 @@ function calculateIntersect(p1, p2, p3, p4) {
 
 function angleIsBetween(n, a, b) {
     //https://www.xarg.org/2010/06/is-an-angle-between-two-other-angles/
-	n = (360 + (n % 360)) % 360;
-	a = (3600000 + a) % 360;
-	b = (3600000 + b) % 360;
+    n = (360 + (n % 360)) % 360;
+    a = (3600000 + a) % 360;
+    b = (3600000 + b) % 360;
 
-	if (a < b)
-		return a <= n && n <= b;
-	return a <= n || n <= b;
+    if (a < b)
+        return a <= n && n <= b;
+    return a <= n || n <= b;
 }
 
 
@@ -134,10 +134,10 @@ function relativeAnchorLocation(angle, width, height) {
 
 
     //-90 to set 0 angle at top  +360 %360 to acaount for negative numbers
-    let angleToP1 = (Math.atan2(point1.y, point1.x) * (180 / Math.PI) - 90+360)%360;
-    let angleToP2 = (Math.atan2(point2.y, point2.x) * (180 / Math.PI) - 90+360)%360;
-    let angleToP3 = (Math.atan2(point3.y, point3.x) * (180 / Math.PI) - 90+360)%360;
-    let angleToP4 = (Math.atan2(point4.y, point4.x) * (180 / Math.PI) - 90+360)%360;
+    let angleToP1 = (Math.atan2(point1.y, point1.x) * (180 / Math.PI) - 90 + 360) % 360;
+    let angleToP2 = (Math.atan2(point2.y, point2.x) * (180 / Math.PI) - 90 + 360) % 360;
+    let angleToP3 = (Math.atan2(point3.y, point3.x) * (180 / Math.PI) - 90 + 360) % 360;
+    let angleToP4 = (Math.atan2(point4.y, point4.x) * (180 / Math.PI) - 90 + 360) % 360;
 
 
     let result = { x: 0, y: 0 };
@@ -158,8 +158,8 @@ function relativeAnchorLocation(angle, width, height) {
     else {
         result = calculateIntersect(point4, point1, centerPoint, farPoint);
     }
-    console.log({x:result.x-(width/2),y:result.y-(height/2)})
-    return {x:result.x-(width/2),y:result.y-(height/2)}
+    console.log({ x: result.x - (width / 2), y: result.y - (height / 2) })
+    return { x: result.x - (width / 2), y: result.y - (height / 2) }
 }
 
 
@@ -181,12 +181,12 @@ const app = Vue.createApp({
         }
     },
 
-    mounted(){
+    mounted() {
         this.updatePie();
     },
     computed: {
         totalSpentFormatted() {
-            let transactions = this.getgroupOnMonth()[this.monthToShow].map(x=>x.data);
+            let transactions = this.getgroupOnMonth()[this.monthToShow].map(x => x.data);
             this.totalSpent = transactions.reduce((total, expense) =>
                 total + expense.amount, 0);
             return this.totalSpent.toFixed(0) + " kr";
@@ -221,17 +221,17 @@ const app = Vue.createApp({
             this.totalSpent = this.transactionList.reduce((total, expense) => total + expense.amount, 0);
             this.writeToLocalStorage(this.transactionList);
             this.updatePie();
-            
+
         },
 
         deleteByMonth() {
             let newList = [];
-            let toRemove = this.getgroupOnMonth()[this.monthToShow].map(x=>x.data.date);
-           for(let item of this.transactionList){
-            if(!toRemove.includes(item.date)){
-                newList.push(item);
+            let toRemove = this.getgroupOnMonth()[this.monthToShow].map(x => x.data.date);
+            for (let item of this.transactionList) {
+                if (!toRemove.includes(item.date)) {
+                    newList.push(item);
+                }
             }
-           } 
             this.transactionList = newList;
             this.monthToShow = "show all";
             this.writeToLocalStorage(this.transactionList);
@@ -239,7 +239,7 @@ const app = Vue.createApp({
         },
 
         getgroupOnMonth() {
-            let output = {"show all":[]};
+            let output = { "show all": [] };
             this.transactionList.forEach(function (item, index) {
 
                 let dateObj = new Date(item.date);
@@ -272,7 +272,7 @@ const app = Vue.createApp({
             let canvas = document.querySelector("#pieCanvas");
 
             //canvas somtimes is not found dont know why
-            if(canvas ==undefined){
+            if (canvas == undefined) {
                 return;
             }
 
