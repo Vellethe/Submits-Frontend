@@ -83,7 +83,7 @@ function makePieSlice(c, startAngle, endAngle, centerX, centerY, radius, color, 
     let heightAproximation = 0;
 
 
-    let temp = RelativeAnchorLocation(startAngle+(differnce/2),textSize.width,heightAproximation)
+    let temp = relativeAnchorLocation(startAngle+(differnce/2),textSize.width,heightAproximation)
     c.strokeText(text, outsideOfCircle2.x+temp.x, outsideOfCircle2.y-temp.y);
 }
 
@@ -123,7 +123,7 @@ function angleIsBetween(n, a, b) {
 }
 
 
-function RelativeAnchorLocation(angle, width, height) {
+function relativeAnchorLocation(angle, width, height) {
     //p1           p2    
     //
     //p3           p4
