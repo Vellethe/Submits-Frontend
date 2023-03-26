@@ -144,7 +144,7 @@ function relativeAnchorLocation(angle, width, height) {
 
     let centerPoint = { x: 0, y: 0 };
     let farPoint = findOutsideOfCricle(degreeToRadian(angle), 0, 0, 300);
-    //top, right down left
+    //top, left down right
     if (angleIsBetween(angle, angleToP1, angleToP2)) {
         result = calculateIntersect(point1, point2, centerPoint, farPoint);
     }
